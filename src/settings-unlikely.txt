@@ -1,0 +1,29 @@
+- public $displaysTitle		= true;				// Whether page title is shown or not
+  let the client manually set the title: if it's set, use it
+- public $usesAutoLogin		= true;				// Whether a user's first comment automatically logs them in
+  eventually implement some sort of authentication
+- public $imageFormat		= 'png';			// Format for icons and other images (use 'svg' for HDPI)
+- public $usesCancelButtons	= true;				// Whether forms have "Cancel" buttons
+  that should probably a theme thing
+- public $appendsCSS		= true;				// Whether to automatically add a CSS <link> element to the page <head>
+  what is the alternative?
+- public $secureCookies		= false;			// Whether cookies set over secure HTTPS will only be transmitted over HTTPS
+  try not to set cookie (delegate to authentication if needed)
+- public $minifiesJavaScript	= false;			// Whether JavaScript output should be minified
+  do not minify dynamic js (and do not create dynamic js if possible)...
+  public $minifyLevel		= 4;				// How much to minify JavaScript code, options: 1, 2, 3, 4
+  public $enablesAPI		= true;				// API: true = fully-enabled, false = fully disabled, or array of modes
+  i guess that there is no real reason for disable the API... but maybe set from whre it can be called
+- public $userDeletionsUnlink	= false;			// Whether user deleted files are actually unlinked from the filesystem
+  do not let the users delete comments; from admin delete or hide
+- public $isMobile		= false;
+  this is not a setting. use an external php library
+- public $showsReplyCount		= true;				// Whether to show reply count separately from total
+  what's this?
+- public $noreplyEmail		= 'noreply@example.com';	// E-mail used when no e-mail is given
+  use the administrator email instead
+- $gravatarForce		= false;			// Whether to force the themed Gravatar images instead of an avatar image
+  we should not manage our own avatars... if ever, it's the authentication service that will do that
+- $this->cookieExpiration	= time () + 60 * 60 * 24 * 30;	// Cookie expiration date
+  if we want cookies...
+
