@@ -2,7 +2,7 @@
 
 namespace Aoloe\Senape\Storage;
 
-class Mysql {
+class Json extends Storage {
     private $settings = null;
 
     public function __construct($settings) {

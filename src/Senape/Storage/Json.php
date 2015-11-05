@@ -2,11 +2,12 @@
 
 namespace Aoloe\Senape\Storage;
 
-class Json {
+class Json extends Storage {
     private $settings = null;
 
     public function __construct($settings) {
         $this->settings = $settings;
+        \Aoloe\debug('settings', $settings);
     }
 
     public function get_list() {

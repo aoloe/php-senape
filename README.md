@@ -23,7 +23,6 @@ short term task:
 - document the fields for the .json comments file
 - get a real list of comments from the Json class
 - in js get the json to be evaluated without the \"s
-- separate the list of all possible settings from the ones that are indeed implemented
 - move the settings ind index.php to a safer place and remove index.php
 - remove index.html
 
@@ -50,6 +49,9 @@ short term task:
   - [ ] show the latest comments
   - [ ] allow moderation of comments by page
   - [ ] add an allowed site (with aliases) / an allowed base path
+- [ ] add an installer
+- [ ] how to document the default settings?
+- [ ] use json or a class for the default settings?
 
 ## Possible features
 

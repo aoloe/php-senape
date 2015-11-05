@@ -78,7 +78,8 @@ class Senape {
     /**
      * get the data from the request (most of the time $_REQUEST) and return a list of those values
      * that are valid, eventually with some default values set
-     * // TODO: to be implemented
+     * TODO: to be implemented
+     * TODO: remae it to something signifying that it cleans up the request
      */
     public function get_request($request) {
         return $request;
@@ -92,11 +93,13 @@ class Senape {
         ));
     }
 
-    public function get_comment_list($request) {
-        $comment = new Senape\Comment($this->settings);
-        return $comment->get_list();
+    /**
+     * @param string $page An identifier unique for the site (mostly and URI or a page title)
+     * @param string $site The site accepting the comments. If null, the domain running the engine will be used.
+     */
+    public function get_comments($page, $site = null) {
+        return new Senape\Comment($this->settings, $page, $site);
     }
-
 
     /**
      * Read the settings from the settings.json file and return an key-value array with all the settings.
