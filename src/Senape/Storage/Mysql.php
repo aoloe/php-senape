@@ -9,7 +9,7 @@ class Json extends Storage {
         $this->settings = $settings;
     }
 
-    public function get_list() {
+    public function getList() {
         return array();
     }
 }

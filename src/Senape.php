@@ -14,6 +14,7 @@ class Senape {
         // TODO: do not use settings for those below
         $this->settings['senape-http-domain'] = $_SERVER['HTTP_HOST']; // TODO: this cannot be correct
         $this->settings['senape-mobile'] = $this->isMobile();
+        $this->settings['senape-basepath-data'] = $this->basePath;
     }
 
 
@@ -56,6 +57,8 @@ class Senape {
      * @param array $settings associative array with local settings
      */
     public function setSettings($settings) {
+        // TODO: sanitize the data in $settings: make sure that all path finish in '/'...
+        $settings['senape-basepath-data'] = rtrim($settings['senape-basepath-data'], '/').'/';
         $this->settings = $settings + $this->settings;
     }
 
@@ -71,7 +74,7 @@ class Senape {
             $settings = json_decode($settings);
         }
         if ($settings) {
-            $this->setSettings();
+            $this->setSettings($settings);
         }
     }
 
@@ -81,23 +84,26 @@ class Senape {
      * TODO: to be implemented
      * TODO: remae it to something signifying that it cleans up the request
      */
-    public function get_request($request) {
-        return $request;
+    public function getRequest($request) {
+        return array (
+            'page' => null,
+            'site' => null,
+        ) + $request;
     }
 
-    public function get_api_response($action, $parameter) {
-        return json_encode(array(
+    public function getApiResponse($action, $parameter) {
+        return array(
             'api-version' => '0.1', // TODO: use a const // get it from composer.json
             'action' => $action,
             'parameter' => $parameter
-        ));
+        );
     }
 
     /**
      * @param string $page An identifier unique for the site (mostly and URI or a page title)
      * @param string $site The site accepting the comments. If null, the domain running the engine will be used.
      */
-    public function get_comments($page, $site = null) {
+    public function getComments($page, $site = null) {
         return new Senape\Comment($this->settings, $page, $site);
     }
 

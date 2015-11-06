@@ -13,11 +13,11 @@ class Comment {
         } else {
             // TODO: error
         }
-        $this->storage->set_client_page($page);
-        $this->storage->set_client_site(is_null($site) ? $_SERVER['SERVER_NAME'] : $site);
+        $this->storage->setClientPage($page);
+        $this->storage->setClientSite($site);
     }
 
-    public function get_list() {
-        return $this->storage->get_list();
+    public function getList() {
+        return $this->storage->getList();
     }
 }

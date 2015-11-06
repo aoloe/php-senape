@@ -3,6 +3,10 @@
         "description": "The main timezone for the size",
         "value": "Europe/Zurich"
     },
+    "senape-basepath-data": {
+        "description": "Path to the directory conaining the data directory. Relative to the main Senape.php file or absolute.",
+        "value": ""
+    },
     "storage": {
         "description": "How to store the data (json, mysql)",
         "value": "json"
@@ -10,5 +14,9 @@
     "storage-json-data-path": {
         "description": "Path to the directory conaining the comments. Relative to the main Senape.php file or absolute.",
         "value": "data/storage/"
+    },
+    "comment-message-no-comment": {
+        "description": "Path to the directory conaining the comments. Relative to the main Senape.php file or absolute.",
+        "value": "Be the first to leave a comment."
     }
 }

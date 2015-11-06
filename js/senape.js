@@ -6,11 +6,13 @@ function Senape(settings) {
     this.settings = {
         'target-id': "senape",
         'data-url': null,
+        'page': '',
+        'site': '',
         title: null
     };
     this.extend(this.settings, settings);
     this.attach();
-    this.ajax(this.settings['data-url'], 'GET', {test: 'abc'}, (function(message) {this.fillit(message);}).bind(this));
+    this.ajax(this.settings['data-url'], 'GET', {page: this.settings['page'], site: this.settings['site']}, (function(message) {this.fillit(message);}).bind(this));
     // console.log(document.currentScript.src);
     console.log(this.settings);
 }

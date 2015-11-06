@@ -2,34 +2,38 @@
 
 namespace Aoloe\Senape\Storage;
 
+/**
+ * TODO:
+ * - client* is not really a good name...
+ */
 abstract class Storage {
     private $settings = null;
 
-    private $client_page = null;
-    private $client_site = null;
+    private $clientPage = null;
+    private $clientSite = null;
 
     public function __construct($settings) {
         $this->settings = $settings;
     }
 
-    public function set_client_page($page) {
-        $this->client_page = $page;
+    public function setClientPage($page) {
+        $this->clientPage = $page;
     }
 
-    protected function get_client_page($page) {
-        return $this->client_page;
+    protected function getClientPage() {
+        return $this->clientPage;
     }
 
-    public function set_client_site($site) {
-        return $this->client_site;
+    public function setClientSite($site) {
+        $this->clientSite = is_null($site) ? $_SERVER['SERVER_NAME'] : $site;
     }
 
-    protected function get_client_site($site) {
-        return $this->client_site;
+    protected function getClientSite() {
+        return $this->clientSite;
     }
 
     /**
      * @return array a list of comments
      */
-    public abstract function get_list();
+    public abstract function getList();
 }
