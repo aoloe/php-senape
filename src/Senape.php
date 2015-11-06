@@ -2,8 +2,8 @@
 
 namespace Aoloe;
 
-
-class Senape {
+class Senape
+{
 
     private $settings = array();
     private $basePath = null;
@@ -14,6 +14,9 @@ class Senape {
         // TODO: do not use settings for those below
         $this->settings['senape-http-domain'] = $_SERVER['HTTP_HOST']; // TODO: this cannot be correct
         $this->settings['senape-mobile'] = $this->isMobile();
+        $this->settings['senape-basepath'] = dirname($this->basePath).'/';
+        $this->settings['senape-basepath-src'] = $this->basePath;
+        $this->settings['senape-basepath-themes'] = $this->settings['senape-basepath'].'themes/';
         $this->settings['senape-basepath-data'] = $this->basePath;
     }
 
@@ -58,7 +61,11 @@ class Senape {
      */
     public function setSettings($settings) {
         // TODO: sanitize the data in $settings: make sure that all path finish in '/'...
-        $settings['senape-basepath-data'] = rtrim($settings['senape-basepath-data'], '/').'/';
+        foreach (array('settings-basepath', 'settings-basepath-data') as $item) {
+            if (array_key_exists($item, $settings)) {
+                $settings[$item] = rtrim($settings[$item], '/').'/';
+            }
+        }
         $this->settings = $settings + $this->settings;
     }
 
@@ -91,20 +98,20 @@ class Senape {
         ) + $request;
     }
 
-    public function getApiResponse($action, $parameter) {
-        return array(
-            'api-version' => '0.1', // TODO: use a const // get it from composer.json
-            'action' => $action,
-            'parameter' => $parameter
-        );
-    }
-
     /**
      * @param string $page An identifier unique for the site (mostly and URI or a page title)
      * @param string $site The site accepting the comments. If null, the domain running the engine will be used.
      */
     public function getComments($page, $site = null) {
         return new Senape\Comment($this->settings, $page, $site);
+    }
+
+    public function getViewHtml() {
+        return new Senape\View\Html($this->settings);
+    }
+
+    public function getViewApi() {
+        return new Senape\View\Api($this->settings);
     }
 
     /**

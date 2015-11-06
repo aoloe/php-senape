@@ -88,10 +88,6 @@
         "description": "Langauge used for the interface",
         "value": "en"
     },
-    "ui-theme": {
-        "description": "HTML and CSS theme the interface",
-        "value": "default"
-    },
     "ui-title-level": {
         "description": "H# for the comments area title",
         "value": 2 

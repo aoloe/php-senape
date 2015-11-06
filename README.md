@@ -42,6 +42,7 @@ Short term tasks:
 - document the fields for the .json comments file
 - get a real list of comments from the Json class
 - remove index.html
+- when in js mode, do not submit the form but simply send the data through ajax.
 
 - [x] create a main class
 - [x] define default settings

@@ -3,6 +3,18 @@
         "description": "The main timezone for the size",
         "value": "Europe/Zurich"
     },
+    "senape-basepath": {
+        "description": "Path to the main Senape directory, where the code resides. Should normally not be set by the user",
+        "value": ""
+    },
+    "senape-basepath-src": {
+        "description": "Path to the directory conaining the src/ directory. Should never be set by the user",
+        "value": ""
+    },
+    "senape-basepath-themes": {
+        "description": "Path to the themes directory. Relative to ??? or absolute.",
+        "value": ""
+    },
     "senape-basepath-data": {
         "description": "Path to the directory conaining the data directory. Relative to the main Senape.php file or absolute.",
         "value": ""
@@ -18,5 +30,9 @@
     "comment-message-no-comment": {
         "description": "Path to the directory conaining the comments. Relative to the main Senape.php file or absolute.",
         "value": "Be the first to leave a comment."
+    },
+    "ui-theme": {
+        "description": "HTML and CSS theme the interface",
+        "value": "default"
     }
 }
