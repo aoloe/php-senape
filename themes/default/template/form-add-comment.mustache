@@ -1,0 +1,21 @@
+<form method="post" action = "{{form-action}}" class="senape-add-comment">
+    <p>
+        <input type="text" name="name" title="{{#i18n.tr}}Name (optional){{/i18n.tr}}"{{#has-name}} value="{{name}}"{{/has-name}} placeholder="{{#i18n.tr}}Name{{/i18n.tr}}">
+        <input type="text" name="email" title="{{#i18n.tr}}Email (optional){{/i18n.tr}}" {{#has-email}} value="{{email}}"{{/has-email}} placeholder="{{#i18n.tr}}Email{{/i18n.tr}}">
+        <input type="text" name="website" title="{{#i18n.tr}}Website (optional){{/i18n.tr}}" {{#has-website}} value="{{website}}"{{/has-website}} placeholder="{{#i18n.tr}}Website{{/i18n.tr}}">
+    </p>
+    <p>
+        <textarea name="comment" title="{{#i18n.tr}}Comment (mandatory){{/i18n.tr}}" placeholder="{{#i18n.tr}}Your comment{{/i18n.tr}}"></textarea>
+        <p class="senape-add-comment-formatting">TODO: List the available formatting</p>
+    </p>
+    <p>
+        <label>
+            <input type="checkbox" name="subscribe"{{#has-notify}} checked="true"{{/has-notify}}> {{#i18n.tr}}Notify me of replies.{{/i18n.tr}}
+        </label>
+    </p>
+    <p>
+        <input type="submit" name="add-comment" value="{{#i18n.tr}}Post comment{{/i18n.tr}}">
+    </p>
+    <input type="hidden" name="page-url" value="{{page-url}}">
+    <input type="hidden" name="comment-last-id" value="{{comment-last-id}}">
+</form>
