@@ -107,6 +107,7 @@ Short term tasks:
   - [ ] only allow to get notifications if the email field is filled (javascript mandatory)
   - [ ] for each first comment on the page, add the page information in the json file (the request should state the last seen comment)
   - [ ] make sure that json the file is locked (for read/write) between read and write
+    - only block user that want to read for writing
     - others should not fail when the file is currently locked
     - http://stackoverflow.com/questions/2450850/read-and-write-to-a-file-while-keeping-lock
   - [ ] spam protection

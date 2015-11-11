@@ -67,7 +67,6 @@ class Json extends Storage {
 
     public function getCommentList() {
         $result = array();
-        // TODO: read the file
         $path = $this->getFilePath();
         // \Aoloe\debug('path', $path);
         $result = file_get_contents($path);
@@ -75,9 +74,16 @@ class Json extends Storage {
         return $result;
     }
 
-    public function addComment($comments) {
-        \Aoloe\debug('comments', $comments);
+    private function writeCommentList() {
+    }
+
+    public function addComment($comment) {
+        // TODO: add locking the file between read and write (only valid for those who want to write)
+        \Aoloe\debug('comment', $comment);
+        $list = $this->getCommentList();
+        $list['comment'][] = $comment;
+        // $this->writeCommentList();
         $path = $this->getFilePath();
-        \Aoloe\debug('path', $path);
+        file_put_contents($path, json_encode($list));
     }
 }
