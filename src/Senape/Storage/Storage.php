@@ -16,5 +16,10 @@ abstract class Storage {
     /**
      * @return array a list of comments
      */
-    public abstract function getList();
+    public abstract function getCommentList();
+
+    /**
+     * @param $comment array with the fields of a comment
+     */
+    public abstract function addComment($comments);
 }

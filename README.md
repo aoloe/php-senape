@@ -90,8 +90,13 @@ Short term tasks:
   - [ ] replace the keys in the translation files with the string in the code
   - [ ] add a `tr_count()` function that respect the numerals
 - [ ] handle errors
-  - [ ] show the errors from php
+  - [ ] show the errors from php.
   - [ ] return the errors as json and display them.
+  - [x] errors are handled by throwing an exception.
+  - [x] if a module wants, it can try to catch it, otherwise the main module builds an errors list with the one that have to be reported to the end user.
+  - [ ] the error are translatable.
+  - [ ] the errors can be logged.
+  - [ ] the renderer gets the public error list and renders them.
 - [ ] return the result as a list / as json.
   - [x] return an empty result
   - [ ] read the comments as json
