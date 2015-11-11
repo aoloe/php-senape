@@ -60,6 +60,7 @@ Short term tasks:
 - get a real list of comments from the Json class
 - remove index.html
 - when in js mode, do not submit the form but simply send the data through ajax.
+- detect (and use for avatar and gravatar) http/https
 
 - [x] create a main class
 - [x] define the settings
@@ -82,6 +83,9 @@ Short term tasks:
     - [ ] dynamically add the result to the html
     - [x] if the settings say so, add labels to the input boxes
 - [ ] add the avatars
+      - [x] show the own avatar or the gravatar by email
+      - [ ] use the settings for the avatars
+      - [ ] correctly detect and use https
 - [x] render the widgets from php
 - [ ] translation
   - [x] create a translation class

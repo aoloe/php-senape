@@ -26,7 +26,16 @@ class Html extends \Aoloe\Senape\View
             ),
         ));
         foreach ($list['comment'] as &$item) {
-            $item['avatar'] = $this->settings['senape-http-theme-current'].'images/avatar.png';
+            if ($item['email'] == '') {
+                $item['avatar'] = $this->settings['senape-http-theme-current'].'images/avatar.png';
+            } else {
+                $size_icon = 45;
+                $gravatar_default = 'mm'; // which icon to use for the default: custom, 'mm', 'identicon', 'monsterid', 'wavatar', or 'retro', 'blank'
+                $item['avatar'] = 'http://gravatar.com/avatar/'.md5(strtolower(trim($item['email']))).'.png?r=pg&s='.$size_icon.'&d='.$gravatar_default;
+                // or https://secure.gravatar.com
+                // TODO: implement the default: our own icon... (only works if publicly accessible)
+                //&d='.($gravatar_theme == 'custom' ? urlencode($item['avatar']) : $gravatar_default).
+            }
         }
         unset($item);
 
