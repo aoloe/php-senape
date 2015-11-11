@@ -16,12 +16,6 @@ class Html extends \Aoloe\Senape\View
         $mustache = new \Mustache_Engine(array(
             'loader' => new \Mustache_Loader_FilesystemLoader($this->path_template),
             'helpers' => array(
-                /*
-                'i18n' => function($text) {
-                    \Aoloe\debug('text', $text);
-                    return $text;
-                },
-                */
                 'i18n' => \Aoloe\Senape\I18n::getInstance($this->settings),
             ),
         ));
