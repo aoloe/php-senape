@@ -80,10 +80,21 @@ class Json extends Storage {
     public function addComment($comment) {
         // TODO: add locking the file between read and write (only valid for those who want to write)
         \Aoloe\debug('comment', $comment);
-        $list = $this->getCommentList();
-        $list['comment'][] = $comment;
-        // $this->writeCommentList();
+
         $path = $this->getFilePath();
-        file_put_contents($path, json_encode($list));
+        $handle = fopen($path,'r+');
+
+        // TODO: do not fail but retry n times if it cannot lock the handle
+        // the truncate hack is needed for read writing and still keeping the lock
+        if (flock($handle, LOCK_EX)) {
+            $list = fread($handle, filesize($path));
+            ftruncate($handle, 0);
+            rewind($handle);
+            fwrite($handle, $list);
+            flock($handle, LOCK_UN);
+        } else {
+            echo "Could not Lock File!";
+        }
+        fclose($handle);
     }
 }

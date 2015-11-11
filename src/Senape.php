@@ -49,8 +49,18 @@ class Senape
     public function initialize() {
         date_default_timezone_set ($this->settings['php-timezone']);
         mb_internal_encoding ('UTF-8');
-        // TODO: do not use settings for those below
-        $this->settings['senape-http-domain'] = $_SERVER['HTTP_HOST']; // TODO: this cannot be correct
+        debug('_SERVER', $_SERVER);
+
+        if (isset($this->settings['senape-basepath-loading-file'])) {
+            // TODO: this only works when Senape is a subdirectory of the loader... if we need more, we will implement it...
+            $pathToSenape = rtrim(substr(__DIR__, strlen(dirname($this->settings['senape-basepath-loading-file']))), '/').'/';
+        } else {
+            $pathToSenape = 'vendor/aoloe/php-senape/';
+        }
+        debug('pathToSenape', $pathToSenape);
+
+
+        $this->settings['senape-http-domain'] = 'http://'.rtrim($_SERVER['HTTP_HOST'].dirname($_SERVER['REQUEST_URI']).'/'.dirname($pathToSenape), '/').'/'; // TODO: this cannot be correct
         $this->settings['senape-mobile'] = $this->isMobile();
         if (is_null($this->settings['senape-basepath'])) {
             $this->settings['senape-basepath'] = dirname($this->basePath).'/';
@@ -59,6 +69,10 @@ class Senape
         if (is_null($this->settings['senape-basepath-themes'])) {
             $this->settings['senape-basepath-themes'] = $this->settings['senape-basepath'].'themes/';
         }
+        if (is_null($this->settings['senape-http-themes'])) {
+            $this->settings['senape-http-themes'] = $this->settings['senape-http-domain'].'themes/';
+        }
+        $this->settings['senape-http-theme-current'] = $this->settings['senape-http-themes'].$this->settings['ui-theme'].'/';
         if (is_null($this->settings['senape-basepath-data'])) {
             $this->settings['senape-basepath-data'] = $this->basePath;
         }

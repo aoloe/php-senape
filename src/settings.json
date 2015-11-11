@@ -11,8 +11,16 @@
         "description": "Path to the directory conaining the src/ directory. Should never be set by the user",
         "value": ""
     },
+    "senape-basepath-loading-file": {
+        "description": "Path to the file loading Senape set by passing __FILE__. Used to define where Senape is installed. If not set, vendor/aoloe/php-senape/src/ is used.",
+        "value": null
+    },
     "senape-basepath-themes": {
         "description": "Path to the themes directory. Relative to ??? or absolute.",
+        "value": null
+    },
+    "senape-http-themes": {
+        "description": "HTTP path to the themes directory. Relative to ??? or absolute.",
         "value": null
     },
     "senape-basepath-data": {

@@ -25,13 +25,15 @@ class Html extends \Aoloe\Senape\View
                 'i18n' => \Aoloe\Senape\I18n::getInstance($this->settings),
             ),
         ));
-        if (empty($list)) {
-            $template = $mustache->loadTemplate('comment-list-empty');
-            // TODO: check if it's not better to put a fixed translatable string in the template and only pass the string in the settings if it is not null... wondering how to allow translations, then: with a custom translations file?
-            return $template->render(array('content' => \Aoloe\Senape\I18n::getInstance($this->settings)->tr($this->settings['comment-message-no-comment'])));
-        } else {
-            return print_r($list, 1);
+        foreach ($list['comment'] as &$item) {
+            $item['avatar'] = $this->settings['senape-http-theme-current'].'images/avatar.png';
         }
+        unset($item);
+
+        // TODO: check if it's not better to put a fixed translatable string in the template and only pass the string in the settings if it is not null... wondering how to allow translations, then: with a custom translations file?
+        // \Aoloe\debug('list', $list);
+        $template = $mustache->loadTemplate('comment-list');
+        return $template->render(array('list' => $list['comment'], 'no-comment' => \Aoloe\Senape\I18n::getInstance($this->settings)->tr($this->settings['comment-message-no-comment'])));
     }
     public function getAddComment() {
         $mustache = new \Mustache_Engine(array(
@@ -42,7 +44,7 @@ class Html extends \Aoloe\Senape\View
         ));
         $template = $mustache->loadTemplate('form-add-comment');
 
-        \Aoloe\debug('settings', $this->settings);
+        // \Aoloe\debug('settings', $this->settings);
         // TODO: translating in the template or here in php before handing over to the template?
         // TODO: pass the current values once and if we have them
         return $template->render(array(

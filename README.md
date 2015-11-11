@@ -8,7 +8,7 @@ A lightweight commenting system:
 
 It's optimized for simple sites with a few pages and few comments per pages and self hosting.
 
-Version 1.0 will be released as soon as it is good enough for my own current needs. Future development depends on your contribution and my future needs.
+Version 1.0 will be released as soon as it is good enough for my own current needs. Further development depends on your contribution and my future needs.
 
 ## Implementation details
 
@@ -22,17 +22,17 @@ Further ideas:
 
 - Allow the user to change his own comment by adding a cookie with the hash of the comment.
 - Eventually allow a login mechanism
-- Eventually store the user credentials (name, email, website) and preferences (subsribe to the replies) in the cookie on a per site basis.
+- Eventually store the user credentials (name, email, website) and preferences (subscribe to the replies) in the cookie on a per site basis.
 - Comments can only be edited through javascript "in place" where the comment is shown.
 - If there is a way to login, the login form should be separated form the "Add comment" one.
 
 ## Why not Hashover
 
-I've been looking for long time for a commenting system that is not bound to any proprietary servirce and can be installed on (pretty) any cheap shared hosting.
+I've been looking for long time for a commenting system that is not bound to any proprietary serrvice and can be installed on (pretty) any cheap shared hosting.
 
-The day I discovered Hashover was a really happy day. Well a first look into the sources was not such a happy experience, but after a few clicks, I also disvered that Hashover-Next was in the workings and it looked much better.
+The day I discovered Hashover was a really happy day. Well a first look into the sources was not such a happy experience, but after a few clicks, I also discovered that Hashover-Next was in the workings and it looked much better.
 
-I did setup a local demo site and it was pleasant to use. I've started configuring it to work with my sites and submitted a few patches. But I kept stepping into what are for me unusual choices that the author of Hashover has made. After having started programming a simpler json storage engine and having spent some time on a workaround to the unusual comment-id sequence uses in Hashover, I said to myself: wouldn't it be easies to start from scratch?
+I did setup a local demo site and it was pleasant to use. I've started configuring it to work with my sites and submitted a few patches. But I kept stepping into what are for me unusual choices that the author of Hashover has made. After having started programming a simpler json storage engine and having spent some time on a workaround to the unusual comment-id sequence used in Hashover, I said to myself: wouldn't it be easies to start from scratch?
 
 Here is a list of what I feel as the main difference between Senape and Hashover (as I know it):
 
@@ -53,7 +53,9 @@ Still, I've learned much from Hashover and I'm grateful for all the work Jacob h
 Short term tasks:
 
 - in js add the form and the no comments yet through template
-- add the first comment
+- add the comments to a list of n latest comments (to be shown to the moderator)
+- add an id / hash to the comment
+- implement the flock
 - document the fields for the .json comments file
 - get a real list of comments from the Json class
 - remove index.html
@@ -75,10 +77,11 @@ Short term tasks:
     - [ ] dynamically add a form / move the form below the comment when in reply mode (js mandatory)
       - [ ] create the javascript to move / add the form
       - [ ] add a "reply to" hidden field in the form
-    - [ ] create a template for the comments list
-    - [ ] create a template for the comment
+    - [x] create a template for the comments list
+    - [x] create a template for the comment
     - [ ] dynamically add the result to the html
     - [x] if the settings say so, add labels to the input boxes
+- [ ] add the avatars
 - [x] render the widgets from php
 - [ ] translation
   - [x] create a translation class
