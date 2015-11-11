@@ -76,7 +76,7 @@ class Senape
      */
     public function setSettings($settings) {
         // TODO: sanitize the data in $settings: make sure that all path finish in '/'...
-        foreach (array('settings-basepath', 'settings-basepath-data') as $item) {
+        foreach (array('senape-basepath', 'senape-basepath-data') as $item) {
             if (array_key_exists($item, $settings)) {
                 $settings[$item] = rtrim($settings[$item], '/').'/';
             }

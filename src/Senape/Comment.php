@@ -50,7 +50,15 @@ class Comment {
      * @param array $comment
      */
     public function add($comment) {
-        // TODO: make sure that $comment is correct
-        $this->storage->addComment($this->getNormalized($comment));
+        // TODO: this is not the right place to catch the exception and build the errors list...
+        try {
+            $this->storage->addComment($this->getNormalized($comment));
+            return true;
+        } catch (\Aoloe\Senape\Exception\FileNotWritable $e) {
+            // TODO: make the error messages translatable
+            $this->error[] = 'The comment could not be written in '.basename($e->getFileNotWritten());
+            \Aoloe\debug('error', $this->error);
+            return false;
+        }
     }
 }
