@@ -6,20 +6,11 @@ class Senape
 {
 
     private $settings = array();
+    private $request = array(
+        'site' => null,
+        'page' => null,
+    );
     private $basePath = null;
-
-    public function initialize() {
-        date_default_timezone_set ($this->settings['php-timezone']);
-        mb_internal_encoding ('UTF-8');
-        // TODO: do not use settings for those below
-        $this->settings['senape-http-domain'] = $_SERVER['HTTP_HOST']; // TODO: this cannot be correct
-        $this->settings['senape-mobile'] = $this->isMobile();
-        $this->settings['senape-basepath'] = dirname($this->basePath).'/';
-        $this->settings['senape-basepath-src'] = $this->basePath;
-        $this->settings['senape-basepath-themes'] = $this->settings['senape-basepath'].'themes/';
-        $this->settings['senape-basepath-data'] = $this->basePath;
-    }
-
 
     public function __construct() {
         $this->basePath = rtrim(__DIR__, '/').'/';
@@ -55,6 +46,30 @@ class Senape
         // Check if visitor is on mobile device
     }
 
+    public function initialize() {
+        date_default_timezone_set ($this->settings['php-timezone']);
+        mb_internal_encoding ('UTF-8');
+        // TODO: do not use settings for those below
+        $this->settings['senape-http-domain'] = $_SERVER['HTTP_HOST']; // TODO: this cannot be correct
+        $this->settings['senape-mobile'] = $this->isMobile();
+        if (is_null($this->settings['senape-basepath'])) {
+            $this->settings['senape-basepath'] = dirname($this->basePath).'/';
+        }
+        $this->settings['senape-basepath-src'] = $this->basePath;
+        if (is_null($this->settings['senape-basepath-themes'])) {
+            $this->settings['senape-basepath-themes'] = $this->settings['senape-basepath'].'themes/';
+        }
+        if (is_null($this->settings['senape-basepath-data'])) {
+            $this->settings['senape-basepath-data'] = $this->basePath;
+        }
+
+        $site_current = implode('.', array_slice(explode('.', $_SERVER['HTTP_HOST']), -2));
+        if (is_null($this->settings['senape-site-valid-list'])) {
+            $this->settings['senape-site-valid-list'] = [$site_current];
+        }
+        $this->settings['senape-site-current'] = $site_current; // default if setSite() is not called
+    }
+
     /**
      * accept local settings and make sure that all settings are set to a default value
      * @param array $settings associative array with local settings
@@ -84,6 +99,14 @@ class Senape
             $this->setSettings($settings);
         }
     }
+    
+    public function setPage($page) {
+        $this->settings['senape-page-current'] = $page;
+    }
+
+    public function setSite($site) {
+        $this->settings['senape-site-current'] = $site;
+    }
 
     /**
      * get the data from the request (most of the time $_REQUEST) and return a list of those values
@@ -91,19 +114,40 @@ class Senape
      * TODO: to be implemented
      * TODO: remae it to something signifying that it cleans up the request
      */
-    public function getRequest($request) {
-        return array (
-            'page' => null,
-            'site' => null,
-        ) + $request;
+    public function setRequest($request) {
+        $this->request += $request;
+    }
+
+    public function getActionController() {
+        $result = null;
+        if (array_key_exists('senape-controller', $this->request) && array_key_exists('senape-action', $this->request)) {
+            // TODO: try to avoid the regexp
+            $controller = preg_replace("/[^[:alnum:][:space:]]/u", '', $this->request['senape-controller']);
+            $action = preg_replace("/[^[:alnum:][:space:]]/u", '', $this->request['senape-action']);
+            debug('controller', $controller);
+            debug('action', $action);
+            if (!empty($controller) && !empty($action)) {
+                $controllerClass = 'Senape\\Controller\\Action'.ucfirst($controller);
+                debug('controllerClass', $controllerClass);
+                $path = $this->settings['senape-basepath-src'].strtr($controllerClass, '\\', '/').'.php';
+                debug('path', $path);
+                if (is_readable($path)) {
+
+                    $controllerClass = '\\Aoloe\\'.$controllerClass;
+                    $result = new $controllerClass($this->settings, $this->request);
+                }
+                debug('result', $result);
+            }
+        }
+        return $result;
     }
 
     /**
      * @param string $page An identifier unique for the site (mostly and URI or a page title)
      * @param string $site The site accepting the comments. If null, the domain running the engine will be used.
      */
-    public function getComments($page, $site = null) {
-        return new Senape\Comment($this->settings, $page, $site);
+    public function getComments() {
+        return new Senape\Comment($this->settings);
     }
 
     public function getViewHtml() {

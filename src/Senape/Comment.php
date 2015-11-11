@@ -5,7 +5,7 @@ namespace Aoloe\Senape;
 class Comment {
     private $storage = null;
 
-    public function __construct($settings, $page, $site = null) {
+    public function __construct($settings) {
         if ($settings['storage'] === 'json') {
             $this->storage = new Storage\Json($settings);
         } elseif ($settings['storage'] === 'mysql') {
@@ -13,8 +13,6 @@ class Comment {
         } else {
             // TODO: error
         }
-        $this->storage->setClientPage($page);
-        $this->storage->setClientSite($site);
     }
 
     public function getList() {

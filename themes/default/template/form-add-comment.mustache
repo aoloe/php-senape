@@ -1,10 +1,14 @@
 <form method="post" action = "{{form-action}}" class="senape-add-comment">
     <p>
+        {{#has-labels}}<label class="senape-label-for-input">{{#i18n.tr}}Name{{/i18n.tr}}{{/has-labels}}</label>
         <input type="text" name="name" title="{{#i18n.tr}}Name (optional){{/i18n.tr}}"{{#has-name}} value="{{name}}"{{/has-name}} placeholder="{{#i18n.tr}}Name{{/i18n.tr}}">
+        {{#has-labels}}<label class="senape-label-for-input">{{#i18n.tr}}Email{{/i18n.tr}}{{/has-labels}}</label>
         <input type="text" name="email" title="{{#i18n.tr}}Email (optional){{/i18n.tr}}" {{#has-email}} value="{{email}}"{{/has-email}} placeholder="{{#i18n.tr}}Email{{/i18n.tr}}">
+        {{#has-labels}}<label class="senape-label-for-input">{{#i18n.tr}}Website{{/i18n.tr}}{{/has-labels}}</label>
         <input type="text" name="website" title="{{#i18n.tr}}Website (optional){{/i18n.tr}}" {{#has-website}} value="{{website}}"{{/has-website}} placeholder="{{#i18n.tr}}Website{{/i18n.tr}}">
     </p>
     <p>
+        {{#has-labels}}<label class="senape-label-for-textarea">{{#i18n.tr}}Comment{{/i18n.tr}}{{/has-labels}}</label>
         <textarea name="comment" title="{{#i18n.tr}}Comment (mandatory){{/i18n.tr}}" placeholder="{{#i18n.tr}}Your comment{{/i18n.tr}}"></textarea>
         <p class="senape-add-comment-formatting">TODO: List the available formatting</p>
     </p>
@@ -16,6 +20,9 @@
     <p>
         <input type="submit" name="add-comment" value="{{#i18n.tr}}Post comment{{/i18n.tr}}">
     </p>
-    <input type="hidden" name="page-url" value="{{page-url}}">
+    <input type="hidden" name="page-current" value="{{page-current}}">
+    <input type="hidden" name="site-current" value="{{site-current}}">
     <input type="hidden" name="comment-last-id" value="{{comment-last-id}}">
+    <input type="hidden" name="senape-controller" value="comment">
+    <input type="hidden" name="senape-action" value="add">
 </form>

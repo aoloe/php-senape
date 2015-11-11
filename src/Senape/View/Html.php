@@ -41,12 +41,16 @@ class Html extends \Aoloe\Senape\View
             ),
         ));
         $template = $mustache->loadTemplate('form-add-comment');
+
+        \Aoloe\debug('settings', $this->settings);
         // TODO: translating in the template or here in php before handing over to the template?
         // TODO: pass the current values once and if we have them
         return $template->render(array(
             // 'has-name' => true,
             // 'name' => 'ale',
-            'page-url' => null, // TODO: the current page
+            'has-labels' => false, // TODO: read it from the settings
+            'site-current' => $this->settings['senape-site-current'],
+            'page-current' => $this->settings['senape-page-current'],
             'comment-last-id' => null, // TODO: the last id the user has seen on this page... 0 if it's the first one. is it really needed?
         ));
     }

@@ -5,7 +5,7 @@
     },
     "senape-basepath": {
         "description": "Path to the main Senape directory, where the code resides. Should normally not be set by the user",
-        "value": ""
+        "value": null 
     },
     "senape-basepath-src": {
         "description": "Path to the directory conaining the src/ directory. Should never be set by the user",
@@ -13,11 +13,11 @@
     },
     "senape-basepath-themes": {
         "description": "Path to the themes directory. Relative to ??? or absolute.",
-        "value": ""
+        "value": null
     },
     "senape-basepath-data": {
         "description": "Path to the directory conaining the data directory. Relative to the main Senape.php file or absolute.",
-        "value": ""
+        "value": null
     },
     "storage": {
         "description": "How to store the data (json, mysql)",
@@ -34,5 +34,17 @@
     "ui-theme": {
         "description": "HTML and CSS theme the interface",
         "value": "default"
+    },
+    "senape-site-valid-list": {
+        "description": "List of valid hosts that can add comments to this service: they are matched from the right to the current host",
+        "value": null
+    },
+    "senape-site-current": {
+        "description": "The site from where the request is coming. This value is set by Senape::setSite(); initialized to the site where Senape is installed..",
+        "value": null
+    },
+    "senape-page-current": {
+        "description": "The page from where the request is coming. This value must be set by Senape::setPage() or in the Javascript arguments.",
+        "value": null
     }
 }

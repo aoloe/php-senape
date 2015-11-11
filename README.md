@@ -52,7 +52,6 @@ Still, I've learned much from Hashover and I'm grateful for all the work Jacob h
 
 Short term tasks:
 
-- move the i18n to its own class
 - in js add the form and the no comments yet through template
 - add the first comment
 - document the fields for the .json comments file
@@ -72,16 +71,24 @@ Short term tasks:
     - [x] test mustache for the php side
     - [x] test mustache for the js side
     - [x] create a template for the comment submission area
+    - [ ] display the form before or after the list (settings)
+    - [ ] dynamically add a form / move the form below the comment when in reply mode (js mandatory)
+      - [ ] create the javascript to move / add the form
+      - [ ] add a "reply to" hidden field in the form
     - [ ] create a template for the comments list
     - [ ] create a template for the comment
     - [ ] dynamically add the result to the html
+    - [x] if the settings say so, add labels to the input boxes
 - [x] render the widgets from php
 - [ ] translation
-  - [ ] create a translation class
-  - [ ] create and load the tranlsation files
+  - [x] create a translation class
+  - [ ] create and load the translation files
   - [ ] use the same code schema as Scribus (de, de-CH with a full translation for each)
   - [ ] the translation files should contain all the strings (if not translated then in english)
   - [ ] allow the user to add his own translation for strings he sets in the settings
+  - [ ] import all translation files from hashove (public domain)
+  - [ ] replace the keys in the translation files with the string in the code
+  - [ ] add a `tr_count()` function that respect the numerals
 - [ ] handle errors
   - [ ] show the errors from php
   - [ ] return the errors as json and display them.
@@ -92,7 +99,13 @@ Short term tasks:
   - [ ] return real comments
 - [ ] add comments
   - [ ] add the first comment
+  - [ ] only allow to get notifications if the email field is filled (javascript mandatory)
   - [ ] for each first comment on the page, add the page information in the json file (the request should state the last seen comment)
+  - [ ] make sure that json the file is locked (for read/write) between read and write
+    - others should not fail when the file is currently locked
+    - http://stackoverflow.com/questions/2450850/read-and-write-to-a-file-while-keeping-lock
+  - [ ] spam protection
+    - [ ] use fake hidden fields that only get filled by bots?
   - [ ] store the comments as json
   - [ ] store the comments as mysql
 - [ ] add an http router/controller for processing the requests
@@ -113,6 +126,10 @@ Short term tasks:
   - [ ] find an algorithm for a  + only ranking
   - [ ] submission time only ranking
   - [ ] should the visitor be able to sort the comments?
+- [ ] add the avatars
+  - [ ] find a way to display the rules for the avatars
+  - [ ] if the name starts with '@' look for a twitter avatar
+  - [ ] if the email is in open thing, display the related avatar
 
 ## Possible features
 
