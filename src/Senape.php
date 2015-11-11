@@ -85,7 +85,7 @@ class Senape
     }
 
     /**
-     * @param string $setSettingsFromFile
+     * @param string $settingsFilename
      */
     public function setSettingsFromFile($settingsFilename) {
         $settings = null;
