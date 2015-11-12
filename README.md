@@ -52,10 +52,12 @@ Still, I've learned much from Hashover and I'm grateful for all the work Jacob h
 
 Short term tasks:
 
+- create an id for each comment.
+- use the id as the key in `$list['comment']`.
+- each comment should have a `reply` array.
 - in js add the form and the no comments yet through template
 - add the comments to a list of n latest comments (to be shown to the moderator)
 - add an id / hash to the comment
-- implement the flock
 - document the fields for the .json comments file
 - get a real list of comments from the Json class
 - remove index.html
@@ -110,17 +112,17 @@ Short term tasks:
   - [ ] read the comments as mysql
   - [ ] return real comments
 - [ ] add comments
-  - [ ] add the first comment
+  - [x] add the first comment
   - [ ] only allow to get notifications if the email field is filled (javascript mandatory)
   - [ ] for each first comment on the page, add the page information in the json file (the request should state the last seen comment)
-  - [ ] make sure that json the file is locked (for read/write) between read and write
+  - [x] make sure that json the file is locked (for read/write) between read and write
     - only block user that want to read for writing
-    - others should not fail when the file is currently locked
     - http://stackoverflow.com/questions/2450850/read-and-write-to-a-file-while-keeping-lock
-  - [ ] spam protection
-    - [ ] use fake hidden fields that only get filled by bots?
+  - [ ] setting for the filesystem access rights to the generated files
   - [ ] store the comments as json
   - [ ] store the comments as mysql
+- [ ] spam protection
+  - [ ] use fake hidden fields that only get filled by bots?
 - [ ] add an http router/controller for processing the requests
 - [ ] add a simple administration interface
   - [ ] show the url to be inserted in the javascript call
@@ -140,10 +142,14 @@ Short term tasks:
   - [ ] submission time only ranking
   - [ ] should the visitor be able to sort the comments?
 - [ ] add the avatars
-  - [ ] find a way to display the rules for the avatars
+  - [x] if the email is on gravatar, display the related avatar
   - [ ] if the name starts with '@' look for a twitter avatar
-  - [ ] if the email is in open thing, display the related avatar
-
+        - https://dev.twitter.com/rest/reference/get/users/show
+        - needs the site to be registered with Twitter
+  - [ ] find a way to display the rules for the avatars
+- [ ] recover when the json files are invalid
+  - [ ] comments file
+  - [ ] settings file
 ## Possible features
 
 - the administrator gets an email for each comment

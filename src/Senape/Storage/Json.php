@@ -77,6 +77,10 @@ class Json extends Storage {
     private function writeCommentList() {
     }
 
+    /**
+     * read the stored list, add the comment, store the list.
+     * use flock to make sure that nobody does the same while we are adding the item to the list.
+     */
     public function addComment($comment) {
         // TODO: add locking the file between read and write (only valid for those who want to write)
         \Aoloe\debug('comment', $comment);
@@ -84,13 +88,22 @@ class Json extends Storage {
         $path = $this->getFilePath();
         $handle = fopen($path,'r+');
 
-        // TODO: do not fail but retry n times if it cannot lock the handle
         // the truncate hack is needed for read writing and still keeping the lock
+        // http://stackoverflow.com/questions/2450850/read-and-write-to-a-file-while-keeping-lock
         if (flock($handle, LOCK_EX)) {
-            $list = fread($handle, filesize($path));
-            ftruncate($handle, 0);
-            rewind($handle);
-            fwrite($handle, $list);
+            $filesize = filesize($path);
+            if ($filesize) {
+                $list = fread($handle, $filesize);
+                $list = json_decode($list, true);
+                if ($list) {
+                    // TODO: for replies, write it below the parent
+                    $list['comment'][] = $comment;
+                    $list = json_encode($list);
+                    ftruncate($handle, 0);
+                    rewind($handle);
+                    fwrite($handle, $list);
+                }
+            }
             flock($handle, LOCK_UN);
         } else {
             echo "Could not Lock File!";
