@@ -70,14 +70,11 @@ Anyway, I've learned much from Hashover and I'm grateful for all the work Jacob 
 
 Short term tasks:
 
-- in js add the form and the no comments yet through template
+- in js add the form the comments through template
 - add the comments to a list of n latest comments (to be shown to the moderator)
 - document the fields for the .json comments file
-- get a real list of comments from the Json class
-- remove index.html
 - when in js mode, do not submit the form but simply send the data through ajax.
-- detect (and use for avatar and gravatar) http/https
-- add `sample.php` to the repository
+- add `sample.php` and `senape.php` as samples to the repository
 
 - [x] create a main class
 - [x] define the settings

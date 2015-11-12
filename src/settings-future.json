@@ -96,14 +96,6 @@
         "description": "Where the comments form is placed (top, bottom)",
         "value": "top"
     },
-    "php-time-format": {
-        "description": "Format for displaying the hour",
-        "value": "H:i"
-    },
-    "php-date-format": {
-        "description": "Format for displaying the date",
-        "value": "d.m.Y"
-    },
     "comment-avatar-mode": {
         "description": "How to display the avatar icon (image, count, none)",
         "value": "image"

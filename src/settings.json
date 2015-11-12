@@ -43,6 +43,14 @@
         "description": "HTML and CSS theme the interface",
         "value": "default"
     },
+    "ui-time-format": {
+        "description": "Format for displaying the hour",
+        "value": "H:i"
+    },
+    "ui-date-format": {
+        "description": "Format for displaying the date",
+        "value": "d.m.Y"
+    },
     "senape-site-valid-list": {
         "description": "List of valid hosts that can add comments to this service: they are matched from the right to the current host",
         "value": null

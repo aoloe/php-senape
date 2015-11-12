@@ -28,14 +28,19 @@ class Comment {
             'name',
             'email',
             'website',
+            'date',
             'comment',
             'status', // pending / approved / hidden
             'reply',
+            'id',
+            'hash',
+            'likes',
         ];
         foreach ($dtd as $item) {
             $result[$item] = array_key_exists($item, $comment) ? $comment[$item] : null;
         }
         $result['status'] = 'pending'; // TODO: or automatically approve if the settings say so
+        $result['date'] = time();
         $result['reply'] = array();
         return $result;
     }

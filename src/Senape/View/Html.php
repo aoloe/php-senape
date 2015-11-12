@@ -30,6 +30,22 @@ class Html extends \Aoloe\Senape\View
                 // TODO: implement the default: our own icon... (only works if publicly accessible)
                 //&d='.($gravatar_theme == 'custom' ? urlencode($item['avatar']) : $gravatar_default).
             }
+            // TODO: use a static/namespaced function in Comment?
+            $now = time();
+            $date = $item['date'] - 60 * 60 * 2;
+            if ($now - $date <= 45 * 60) {
+                $item['date'] = ceil(($now - $date) / 60 ).' minutes ago'; // TODO: translate this, with or without s
+            } elseif ($now - $date < 12 * 60 * 60) {
+                $item['date'] = ceil(($now - $date) / 60 / 60 ).' hours ago';
+            } elseif ($date > strtotime('today')) {
+                $item['date'] = 'today';
+            } elseif ($date > strtotime('-1 day')) {
+                $item['date'] = 'yesterday';
+            } elseif ($date > strtotime('-7 day')) {
+                $item['date'] = ceil(($now - $date) / 60 / 60 / 24).' days ago';
+            } else {
+                $item['date'] = date($this->settings['ui-date-format'], $date);
+            }
         }
         unset($item);
 
