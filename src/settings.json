@@ -43,6 +43,10 @@
         "description": "HTML and CSS theme the interface",
         "value": "default"
     },
+    "ui-avatar-theme": {
+        "description": "Gravatar theme to use ('none', 'custom', 'identicon', 'monsterid', 'wavatar', or 'retro')",
+        "value": "custom"
+    },
     "ui-time-format": {
         "description": "Format for displaying the hour",
         "value": "H:i"

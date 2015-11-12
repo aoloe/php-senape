@@ -100,10 +100,6 @@
         "description": "How to display the avatar icon (image, count, none)",
         "value": "image"
     },
-    "comment-avatar-theme": {
-        "description": "Gravatar theme to use ('custom', 'identicon', 'monsterid', 'wavatar', or 'retro')",
-        "value": "custom"
-    },
     "comment-avatar-size": {
         "description": "Size of the avatar icon in pixels",
         "value": 45
