@@ -35,13 +35,13 @@ class Json extends Storage {
     }
 
     private function createPage($path) {
-        // TODO: put in there a minimal valid file?
         $page = $this->settings['senape-page-current'];
+        // TODO: this is not the right place for define the content of the page...
         $page = [
             'title' => '',
             'url' => '',
-            'status' => '',
-            'last_key' => '',
+            'status' => '', // open / locked / hidden
+            'last_id' => 0,
             'comment' => [],
         ];
         file_put_contents($path, json_encode($page));
@@ -55,7 +55,7 @@ class Json extends Storage {
         $site = $this->settings['senape-site-current'];
         $page = $this->settings['senape-page-current'];
         $path = $this->settings['senape-basepath-data'].$this->settings['storage-json-data-path'].$site.'/'.$page.'.json';
-        \Aoloe\debug('path', $path);
+        // \Aoloe\debug('path', $path);
         if (!file_exists($path)) {
             try {
                 $this->ensureDirectoryWritable(dirname($path));
@@ -131,9 +131,12 @@ class Json extends Storage {
         \Aoloe\debug('comment', $comment);
 
         $list = $this->getCommentListForWrite();
-        // TODO: for replies, write it below the parent
-        $list['comment'][] = $comment;
-        $this->writeCommentList($list);
+        $comment['id'] = ++$comment['last_id'];
+        $comment['hash'] = md5(bin2hex(openssl_random_pseudo_bytes(12)));
 
+        // TODO: for replies, write it below the parent
+        $list['comment'][$comment['id']] = $comment;
+        $this->writeCommentList($list);
+        return $comment;
     }
 }

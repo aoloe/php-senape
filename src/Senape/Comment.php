@@ -29,10 +29,14 @@ class Comment {
             'email',
             'website',
             'comment',
+            'status', // pending / approved / hidden
+            'reply',
         ];
         foreach ($dtd as $item) {
             $result[$item] = array_key_exists($item, $comment) ? $comment[$item] : null;
         }
+        $result['status'] = 'pending'; // TODO: or automatically approve if the settings say so
+        $result['reply'] = array();
         return $result;
     }
 

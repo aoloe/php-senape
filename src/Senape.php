@@ -20,7 +20,7 @@ class Senape
     public function initialize() {
         date_default_timezone_set ($this->settings['php-timezone']);
         mb_internal_encoding ('UTF-8');
-        debug('_SERVER', $_SERVER);
+        // debug('_SERVER', $_SERVER);
 
         if (isset($this->settings['senape-basepath-loading-file'])) {
             // TODO: this only works when Senape is a subdirectory of the loader... if we need more, we will implement it...
@@ -28,10 +28,10 @@ class Senape
         } else {
             $pathToSenape = 'vendor/aoloe/php-senape/';
         }
-        debug('pathToSenape', $pathToSenape);
+        // debug('pathToSenape', $pathToSenape);
 
-
-        $this->settings['senape-http-domain'] = 'http://'.rtrim($_SERVER['HTTP_HOST'].dirname($_SERVER['REQUEST_URI']).'/'.dirname($pathToSenape), '/').'/'; // TODO: this cannot be correct
+        $this->settings['senape-http-protcol'] = $_SERVER['REQUEST_SCHEME'];
+        $this->settings['senape-http-domain'] = $this->settings['senape-http-protcol'].'://'.rtrim($_SERVER['HTTP_HOST'].dirname($_SERVER['REQUEST_URI']).'/'.dirname($pathToSenape), '/').'/'; // TODO: check if this is correct in all cases
         $this->settings['senape-mobile'] = $this->isMobile();
         if (is_null($this->settings['senape-basepath'])) {
             $this->settings['senape-basepath'] = dirname($this->basePath).'/';

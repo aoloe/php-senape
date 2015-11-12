@@ -10,6 +10,22 @@ It's optimized for simple sites with a few pages and few comments per pages and 
 
 Version 1.0 will be released as soon as it is good enough for my own current needs. Further development depends on your contribution and my future needs.
 
+## Tutorial
+
+### Rendering the comments from PHP
+
+### Centralizing the PHP rendering
+
+### Rendering through client side javascript
+
+## Contributing
+
+For now, the best you can do is to have a look at the `TODO:` in the code.
+
+Second best is choosing one of the _unchecked_ items in the todo list included in this README file.
+
+Before working on anything, please add a matching ticket in the issue tracker stating that you will write on it, fork, create a new branch and make a pull request when you're done.
+
 ## Implementation details
 
 ### Submitting a comment
@@ -28,34 +44,31 @@ Further ideas:
 
 ## Why not Hashover
 
-I've been looking for long time for a commenting system that is not bound to any proprietary serrvice and can be installed on (pretty) any cheap shared hosting.
+For a long time, I've been looking for a commenting system that is not bound to any proprietary serrvice and can be installed on (pretty) any cheap shared hosting.
 
 The day I discovered Hashover was a really happy day. Well a first look into the sources was not such a happy experience, but after a few clicks, I also discovered that Hashover-Next was in the workings and it looked much better.
 
-I did setup a local demo site and it was pleasant to use. I've started configuring it to work with my sites and submitted a few patches. But I kept stepping into what are for me unusual choices that the author of Hashover has made. After having started programming a simpler json storage engine and having spent some time on a workaround to the unusual comment-id sequence used in Hashover, I said to myself: wouldn't it be easies to start from scratch?
+I did setup a local demo site and it was pleasant to use. I've started configuring it to work with my sites and submitted a few patches. But I kept stepping into what are for me unusual choices that the author of Hashover has made. I even start programming a simpler Json storage engine but, after having spent some time on a workaround to the unusual comment-id sequence used in Hashover, I said to myself: wouldn't it be easier to start from scratch?
+
+Senape is my try at providing a commenting service. Deeply inspired by Hashover, but with no code borrowed from it (both because of the very different coding style and the incompatible license).
 
 Here is a list of what I feel as the main difference between Senape and Hashover (as I know it):
 
-- Using a liberal license (and not asking for attribution for all changes).
-- Keep dependencies to a minimum but without refusing to have any.
+- Using a liberal license.
+- Keep dependencies to a minimum instead of refusing to have any.
 - No generated javascript.
 - Using Composer and Packagist.
 - Following the PSR standards.
 - All HTML generated through templates.
 - Use the same code for generating js and php comments.
-- Does not try to guess what is happening: always uses explicit commands.
+- Does not try to guess what is happening: always rely on explicit commands.
 - Javascript only works with modern browsers.
 
-Still, I've learned much from Hashover and I'm grateful for all the work Jacob has done!
+Anyway, I've learned much from Hashover and I'm grateful for all the work Jacob has done!
 
 ## Todo
 
 Short term tasks:
-
-- create an id for each comment.
-- use the id as the key in `$list['comment']`.
-- add an id / hash to the comment
-- each comment should have a `reply` array.
 
 - in js add the form and the no comments yet through template
 - add the comments to a list of n latest comments (to be shown to the moderator)
@@ -64,6 +77,7 @@ Short term tasks:
 - remove index.html
 - when in js mode, do not submit the form but simply send the data through ajax.
 - detect (and use for avatar and gravatar) http/https
+- add `sample.php` to the repository
 
 - [x] create a main class
 - [x] define the settings
@@ -109,19 +123,24 @@ Short term tasks:
   - [ ] the renderer gets the public error list and renders them.
 - [ ] return the result as a list / as json.
   - [x] return an empty result
-  - [ ] read the comments as json
+  - [x] read the comments as json
   - [ ] read the comments as mysql
-  - [ ] return real comments
+  - [x] return real comments
 - [ ] add comments
   - [x] add the first comment
-  - [ ] only allow to get notifications if the email field is filled (javascript mandatory)
+  - [ ] allow replies
+    - [ ] store the replies
+    - [ ] render the replies in mustache
+      - http://stackoverflow.com/questions/31885263/mustache-js-how-to-create-a-recursive-list-with-an-unknown-number-of-sub-lists
   - [ ] for each first comment on the page, add the page information in the json file (the request should state the last seen comment)
   - [x] make sure that json the file is locked (for read/write) between read and write
     - only block user that want to read for writing
     - http://stackoverflow.com/questions/2450850/read-and-write-to-a-file-while-keeping-lock
   - [ ] setting for the filesystem access rights to the generated files
-  - [ ] store the comments as json
+  - [x] store the comments as json
   - [ ] store the comments as mysql
+- [ ] send notifications
+  - [ ] only allow to get notifications if the email field is filled (javascript mandatory)
 - [ ] spam protection
   - [ ] use fake hidden fields that only get filled by bots?
 - [ ] add an http router/controller for processing the requests
@@ -146,11 +165,12 @@ Short term tasks:
   - [x] if the email is on gravatar, display the related avatar
   - [ ] if the name starts with '@' look for a twitter avatar
         - https://dev.twitter.com/rest/reference/get/users/show
-        - needs the site to be registered with Twitter
+        - needs the comments service to be registered with Twitter
   - [ ] find a way to display the rules for the avatars
 - [ ] recover when the json files are invalid
   - [ ] comments file
   - [ ] settings file
+
 ## Possible features
 
 - the administrator gets an email for each comment
@@ -161,3 +181,4 @@ Short term tasks:
   - it should also be possible to use plugins for the storage?
 - administrate the comments from the page itself
 - create a converter enabling to export the comments or switch storage engine (by site(s))
+- implement the storage as a plugin reacting to events (and let people add their own storage engines)

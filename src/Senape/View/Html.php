@@ -25,7 +25,7 @@ class Html extends \Aoloe\Senape\View
             } else {
                 $size_icon = 45;
                 $gravatar_default = 'mm'; // which icon to use for the default: custom, 'mm', 'identicon', 'monsterid', 'wavatar', or 'retro', 'blank'
-                $item['avatar'] = 'http://gravatar.com/avatar/'.md5(strtolower(trim($item['email']))).'.png?r=pg&s='.$size_icon.'&d='.$gravatar_default;
+                $item['avatar'] = $this->settings['senape-http-protcol'].'://gravatar.com/avatar/'.md5(strtolower(trim($item['email']))).'.png?r=pg&s='.$size_icon.'&d='.$gravatar_default;
                 // or https://secure.gravatar.com
                 // TODO: implement the default: our own icon... (only works if publicly accessible)
                 //&d='.($gravatar_theme == 'custom' ? urlencode($item['avatar']) : $gravatar_default).
@@ -36,7 +36,7 @@ class Html extends \Aoloe\Senape\View
         // TODO: check if it's not better to put a fixed translatable string in the template and only pass the string in the settings if it is not null... wondering how to allow translations, then: with a custom translations file?
         // \Aoloe\debug('list', $list);
         $template = $mustache->loadTemplate('comment-list');
-        return $template->render(array('list' => $list['comment'], 'no-comment' => \Aoloe\Senape\I18n::getInstance($this->settings)->tr($this->settings['comment-message-no-comment'])));
+        return $template->render(array('list' => new \ArrayIterator($list['comment']), 'no-comment' => \Aoloe\Senape\I18n::getInstance($this->settings)->tr($this->settings['comment-message-no-comment'])));
     }
     public function getAddComment() {
         $mustache = new \Mustache_Engine(array(
