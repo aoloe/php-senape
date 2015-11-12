@@ -54,7 +54,11 @@ class Html extends \Aoloe\Senape\View
         // TODO: check if it's not better to put a fixed translatable string in the template and only pass the string in the settings if it is not null... wondering how to allow translations, then: with a custom translations file?
         // \Aoloe\debug('list', $list);
         $template = $mustache->loadTemplate('comment-list');
-        return $template->render(array('list' => new \ArrayIterator($list['comment']), 'no-comment' => \Aoloe\Senape\I18n::getInstance($this->settings)->tr($this->settings['comment-message-no-comment'])));
+        return $template->render(array(
+            'list' => new \ArrayIterator($list['comment']),
+            'no-comment' => \Aoloe\Senape\I18n::getInstance($this->settings)->tr($this->settings['comment-message-no-comment']),
+            'has-replies' => $this->settings['comment-reply'],
+        ));
     }
     public function getAddComment() {
         $mustache = new \Mustache_Engine(array(

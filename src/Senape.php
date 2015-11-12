@@ -7,7 +7,7 @@ class Senape
 
     private $settings = array();
     private $request = array(
-        'site' => null,
+        'site' => null, // TODO: are those two really needed?
         'page' => null,
     );
     private $basePath = null;
@@ -15,6 +15,36 @@ class Senape
     public function __construct() {
         $this->basePath = rtrim(__DIR__, '/').'/';
         $this->settings = $this->getSettingsDefault();
+    }
+
+    /**
+     * accept local settings and make sure that all settings are set to a default value
+     * @param array $settings associative array with local settings
+     */
+    public function setSettings($settings) {
+        // TODO: sanitize the data in $settings: make sure that all path finish in '/'...
+        foreach (array('senape-basepath', 'senape-basepath-data') as $item) {
+            if (array_key_exists($item, $settings)) {
+                $settings[$item] = rtrim($settings[$item], '/').'/';
+            }
+        }
+        $this->settings = $settings + $this->settings;
+    }
+
+    /**
+     * @param string $settingsFilename
+     */
+    public function setSettingsFromFile($settingsFilename) {
+        $settings = null;
+        if (file_exists($settingsFilename)) {
+            $settings = file_get_contents($settingsFilename);
+        }
+        if ($settings) {
+            $settings = json_decode($settings);
+        }
+        if ($settings) {
+            $this->setSettings($settings);
+        }
     }
 
     public function initialize() {
@@ -54,36 +84,6 @@ class Senape
         }
         $this->settings['senape-site-current'] = $site_current; // default if setSite() is not called
     }
-
-    /**
-     * accept local settings and make sure that all settings are set to a default value
-     * @param array $settings associative array with local settings
-     */
-    public function setSettings($settings) {
-        // TODO: sanitize the data in $settings: make sure that all path finish in '/'...
-        foreach (array('senape-basepath', 'senape-basepath-data') as $item) {
-            if (array_key_exists($item, $settings)) {
-                $settings[$item] = rtrim($settings[$item], '/').'/';
-            }
-        }
-        $this->settings = $settings + $this->settings;
-    }
-
-    /**
-     * @param string $settingsFilename
-     */
-    public function setSettingsFromFile($settingsFilename) {
-        $settings = null;
-        if (file_exists($settingsFilename)) {
-            $settings = file_get_contents($settingsFilename);
-        }
-        if ($settings) {
-            $settings = json_decode($settings);
-        }
-        if ($settings) {
-            $this->setSettings($settings);
-        }
-    }
     
     public function setPage($page) {
         $this->settings['senape-page-current'] = $page;
@@ -101,6 +101,15 @@ class Senape
      */
     public function setRequest($request) {
         $this->request += $request;
+    }
+
+    public function readRequest() {
+        if (array_key_exists('senape-page-current', $this->request)) {
+            $this->settings['senape-page-current'] = $this->request['senape-page-current'];
+        }
+        if (array_key_exists('senape-page-site', $this->request)) {
+            $this->settings['senape-page-site'] = $this->request['senape-page-site'];
+        }
     }
 
     public function getActionController() {

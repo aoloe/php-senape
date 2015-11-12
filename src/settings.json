@@ -39,6 +39,10 @@
         "description": "Path to the directory conaining the comments. Relative to the main Senape.php file or absolute.",
         "value": "Be the first to leave a comment."
     },
+    "comment-reply": {
+        "description": "Allow replies to comments",
+        "value": true
+    },
     "ui-theme": {
         "description": "HTML and CSS theme the interface",
         "value": "default"

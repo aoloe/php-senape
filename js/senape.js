@@ -12,7 +12,7 @@ function Senape(settings) {
     };
     this.extend(this.settings, settings);
     this.attach();
-    this.ajax(this.settings['data-url'], 'GET', {page: this.settings['page'], site: this.settings['site']}, (function(message) {this.fillit(message);}).bind(this));
+    this.ajax(this.settings['data-url'], 'GET', {'senape-page-current': this.settings['page'], 'senape-site-curent': this.settings['site']}, (function(message) {this.fillit(message);}).bind(this));
     // console.log(document.currentScript.src);
     console.log(this.settings);
 }

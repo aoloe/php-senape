@@ -51,9 +51,9 @@
         "value": false,
         "status": "idea"
     },
-    "comment-reply": {
-        "description": "Allow replies to comments",
-        "value": true
+    "comment-reply-mode": {
+        "description": "How to display the list of replies (thread, stream)",
+        "value": "thread"
     },
     "comment-reply-collapse": {
         "description": "By default, collapse the replies",
@@ -103,10 +103,6 @@
     "comment-avatar-size": {
         "description": "Size of the avatar icon in pixels",
         "value": 45
-    },
-    "comment-reply-mode": {
-        "description": "How to display the list of replies (thread, stream)",
-        "value": "thread"
     },
     "comment-form-labels": {
         "description": "Display labels above the input fields",

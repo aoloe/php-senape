@@ -8,7 +8,11 @@ A lightweight commenting system:
 
 It's optimized for simple sites with a few pages and few comments per pages and self hosting.
 
+Currently you can add comments and retrieve them in a simple list from a PHP script.
+
 Version 1.0 will be released as soon as it is good enough for my own current needs. Further development depends on your contribution and my future needs.
+
+Verwsion 2.0 will be released as soon as all the features marked in the todo list below will be implemented (of course, the list of todos is not definitive).
 
 ## Tutorial
 
@@ -22,9 +26,9 @@ Version 1.0 will be released as soon as it is good enough for my own current nee
 
 For now, the best you can do is to have a look at the `TODO:` in the code.
 
-Second best is choosing one of the _unchecked_ items in the todo list included in this README file.
+Second best is choosing one of the _unchecked_ items in the todo list below.
 
-Before working on anything, please add a matching ticket in the issue tracker stating that you will write on it, fork, create a new branch and make a pull request when you're done.
+Before working on a feature, please add a matching ticket in the issue tracker and announce that you will be working on it. Then fork the repository, create a new branch and make a pull request when you're done.
 
 ## Implementation details
 
@@ -70,10 +74,15 @@ Anyway, I've learned much from Hashover and I'm grateful for all the work Jacob 
 
 Short term tasks:
 
-- in js add the form the comments through template
+- in js add the form and the comments through template
+  - the api should only return in the list the fields that are meant to be shown (no hash, email, ...)
+- add the replies
+  - create a trigger that moves the submit form below the comment that needs a reply
+  - hide the cancel button when not in reply mode
 - add the comments to a list of n latest comments (to be shown to the moderator)
 - document the fields for the .json comments file
 - when in js mode, do not submit the form but simply send the data through ajax.
+  - optionally, allow the ajax submit also when in php mode (does it make sense?)
 - add `sample.php` and `senape.php` as samples to the repository
 
 - [x] create a main class
@@ -85,21 +94,25 @@ Short term tasks:
   - [x] return json from php
   - [ ] use a js template engine
 - [ ] create the main widgets
-    - [x] test mustache for the php side
-    - [x] test mustache for the js side
-    - [x] create a template for the comment submission area
-    - [ ] display the form before or after the list (settings)
-    - [ ] dynamically add a form / move the form below the comment when in reply mode (js mandatory)
-      - [ ] create the javascript to move / add the form
-      - [ ] add a "reply to" hidden field in the form
-    - [x] create a template for the comments list
-    - [x] create a template for the comment
-    - [ ] dynamically add the result to the html
-    - [x] if the settings say so, add labels to the input boxes
-- [ ] add the avatars
-      - [x] show the own avatar or the gravatar by email
-      - [ ] use the settings for the avatars
-      - [ ] correctly detect and use https
+   - [x] test mustache for the php side
+   - [x] test mustache for the js side
+   - [x] create a template for the comment submission area
+   - [ ] display the form before or after the list (settings)
+   - [ ] dynamically add a form / move the form below the comment when in reply mode (js mandatory)
+     - [ ] create the javascript to move / add the form
+     - [ ] add a "reply to" hidden field in the form
+   - [x] create a template for the comments list
+   - [x] create a template for the comment
+   - [ ] dynamically add the result to the html
+   - [x] if the settings say so, add labels to the input boxes
+- [x] add the avatars
+  - [x] show the own avatar or the gravatar by email
+  - [x] use the settings for the avatars
+  - [x] correctly detect and use https
+  - [ ] if the name starts with '@' look for a twitter avatar
+    - https://dev.twitter.com/rest/reference/get/users/show
+    - needs the comments service to be registered with Twitter
+  - [ ] find a way to display the rules for the avatars
 - [x] render the widgets from php
 - [ ] translation
   - [x] create a translation class
@@ -158,15 +171,10 @@ Short term tasks:
   - [ ] find an algorithm for a  + only ranking
   - [ ] submission time only ranking
   - [ ] should the visitor be able to sort the comments?
-- [ ] add the avatars
-  - [x] if the email is on gravatar, display the related avatar
-  - [ ] if the name starts with '@' look for a twitter avatar
-        - https://dev.twitter.com/rest/reference/get/users/show
-        - needs the comments service to be registered with Twitter
-  - [ ] find a way to display the rules for the avatars
 - [ ] recover when the json files are invalid
   - [ ] comments file
   - [ ] settings file
+- [ ] in the "add comments" form, add a way to set hidden fields to be filled with the state of the hosting framework (`page_id`, ...)
 
 ## Possible features
 
