@@ -128,15 +128,40 @@ class Json extends Storage {
      * read the stored list, add the comment, store the list.
      */
     public function addComment($comment) {
-        \Aoloe\debug('comment', $comment);
+        // \Aoloe\debug('comment', $comment);
+
+        // \Aoloe\debug('remove the fake reply-to-id');
+        // $comment['reply-to-id'] = 1;
 
         $list = $this->getCommentListForWrite();
-        $comment['id'] = ++$comment['last_id'];
+
+        $comment['id'] = ++$list['last_id'];
         $comment['hash'] = md5(bin2hex(openssl_random_pseudo_bytes(12)));
 
         // TODO: for replies, write it below the parent
-        $list['comment'][$comment['id']] = $comment;
+        if (array_key_exists('reply-to-id', $comment) && ($comment['reply-to-id'] > 0)) {
+            $this->addToParentComment($list['comment'], $comment);
+        } else {
+            $list['comment'][$comment['id']] = $comment;
+        }
+        // \Aoloe\debug('list', $list);
+        // \Aoloe\debug('temporary disabled the writing of the list');
         $this->writeCommentList($list);
         return $comment;
+    }
+
+    private function addToParentComment(&$list, $comment) {
+        foreach ($list as $key => $value) {
+            if ($value['id'] == $comment['reply-to-id']) {
+                unset($comment['reply-to-id']);
+                $list[$key]['reply'][$comment['id']] = $comment;
+                return true;
+            } elseif (!empty($value['reply'])) {
+                if ($this->addToParentComment($list, $comment)) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 }

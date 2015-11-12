@@ -77,6 +77,7 @@ Short term tasks:
 - in js add the form and the comments through template
   - the api should only return in the list the fields that are meant to be shown (no hash, email, ...)
 - add the replies
+  - add the reply to the json file
   - create a trigger that moves the submit form below the comment that needs a reply
   - hide the cancel button when not in reply mode
 - add the comments to a list of n latest comments (to be shown to the moderator)

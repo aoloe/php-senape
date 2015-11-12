@@ -2,7 +2,7 @@
 {{#list}}
 <li><div><img src="{{avatar}}"> {{name}}, {{date}}</div>
     <div>{{comment}}</div>
-    <div>♡ Like {{#has-replies}}← <a id="senape-reply-action">{{#i18n.tr}}Reply{{/i18n.tr}}</a>{{/has-replies}}</div>
+    <div>♡ Like {{#has-replies}}← <a id="senape-reply-action" data-senape-comment-id="{{id}}">{{#i18n.tr}}Reply{{/i18n.tr}}</a>{{/has-replies}}</div>
 </li>
 {{/list}}
 {{^list}}
