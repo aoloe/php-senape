@@ -54,10 +54,11 @@ Short term tasks:
 
 - create an id for each comment.
 - use the id as the key in `$list['comment']`.
+- add an id / hash to the comment
 - each comment should have a `reply` array.
+
 - in js add the form and the no comments yet through template
 - add the comments to a list of n latest comments (to be shown to the moderator)
-- add an id / hash to the comment
 - document the fields for the .json comments file
 - get a real list of comments from the Json class
 - remove index.html
@@ -95,7 +96,7 @@ Short term tasks:
   - [ ] use the same code schema as Scribus (de, de-CH with a full translation for each)
   - [ ] the translation files should contain all the strings (if not translated then in english)
   - [ ] allow the user to add his own translation for strings he sets in the settings
-  - [ ] import all translation files from hashove (public domain)
+  - [ ] import all translation files from hashover (public domain)
   - [ ] replace the keys in the translation files with the string in the code
   - [ ] add a `tr_count()` function that respect the numerals
 - [ ] handle errors

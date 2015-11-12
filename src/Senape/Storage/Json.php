@@ -8,6 +8,8 @@ namespace Aoloe\Senape\Storage;
 
 class Json extends Storage {
 
+    private $fileHandle = null;
+
     /**
      * recursively walk through a dirctory path until it finds a writable directory and
      * create the missing directories in the path
@@ -74,40 +76,64 @@ class Json extends Storage {
         return $result;
     }
 
-    private function writeCommentList() {
+    /**
+     * Read the list from the file. create it if it does not exist, yet.
+     * Use flock to make sure that nobody does the same while we are adding the item to the list.
+     * You always have to call writeCommentList() afterwards, to release the lock and close the file.
+     */
+    private function getCommentListForWrite() {
+        $result = null;
+
+        $path = $this->getFilePath();
+        $this->fileHandle = fopen($path,'r+');
+
+        // the truncate hack is needed for read writing and still keeping the lock
+        // http://stackoverflow.com/questions/2450850/read-and-write-to-a-file-while-keeping-lock
+        if (flock($this->fileHandle, LOCK_EX)) {
+            $filesize = filesize($path);
+            if ($filesize) {
+                $list = fread($this->fileHandle, $filesize);
+                $list = json_decode($list, true);
+                if ($list) {
+                    $result = $list;
+                } else {
+                    // TODO: throw an exception
+                }
+            } else {
+                // TODO: throw an exception
+            }
+        } else {
+            echo "Could not Lock File!";
+        }
+        return $result;
+    }
+
+    /**
+     * write the list in the json file by using the handle created by getCommentListForWrite()
+     */
+    private function writeCommentList($list) {
+        if ($this->fileHandle) {
+            $list = json_encode($list);
+            ftruncate($this->fileHandle, 0);
+            rewind($this->fileHandle);
+            fwrite($this->fileHandle, $list);
+            flock($this->fileHandle, LOCK_UN);
+            fclose($this->fileHandle);
+        } else {
+            // TODO:: throw an exception
+        }
     }
 
     /**
      * read the stored list, add the comment, store the list.
-     * use flock to make sure that nobody does the same while we are adding the item to the list.
      */
     public function addComment($comment) {
-        // TODO: add locking the file between read and write (only valid for those who want to write)
         \Aoloe\debug('comment', $comment);
 
-        $path = $this->getFilePath();
-        $handle = fopen($path,'r+');
+        $list = $this->getCommentListForWrite();
+        // TODO: for replies, write it below the parent
+        $list['comment'][] = $comment;
+        $this->writeCommentList($list);
 
-        // the truncate hack is needed for read writing and still keeping the lock
-        // http://stackoverflow.com/questions/2450850/read-and-write-to-a-file-while-keeping-lock
-        if (flock($handle, LOCK_EX)) {
-            $filesize = filesize($path);
-            if ($filesize) {
-                $list = fread($handle, $filesize);
-                $list = json_decode($list, true);
-                if ($list) {
-                    // TODO: for replies, write it below the parent
-                    $list['comment'][] = $comment;
-                    $list = json_encode($list);
-                    ftruncate($handle, 0);
-                    rewind($handle);
-                    fwrite($handle, $list);
-                }
-            }
-            flock($handle, LOCK_UN);
-        } else {
-            echo "Could not Lock File!";
-        }
-        fclose($handle);
     }
 }
