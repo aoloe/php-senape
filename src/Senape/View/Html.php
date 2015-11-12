@@ -67,7 +67,7 @@ class Html extends \Aoloe\Senape\View
                 'i18n' => \Aoloe\Senape\I18n::getInstance($this->settings),
             ),
         ));
-        $template = $mustache->loadTemplate('form-add-comment');
+        $template = $mustache->loadTemplate('comment-form-add');
 
         // \Aoloe\debug('settings', $this->settings);
         // TODO: translating in the template or here in php before handing over to the template?

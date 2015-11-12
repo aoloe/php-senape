@@ -1,0 +1,21 @@
+<ul>
+{{#list}}
+<li>< href="?senape-form-site={{#url.enc}}{{item}}">{{/url.enc}}">{{item}}</a></li>
+{{/list}}
+{{^list}}
+<li>{{no-site}}</li>
+{{/list}}
+</ul>
+
+<form method="post" id="form-temporary" action = "{{form-action}}" class="senape-add-comment">
+    <p>
+        {{#has-labels}}<label class="senape-label-for-input">{{#i18n.tr}}Name{{/i18n.tr}}{{/has-labels}}</label>
+    </p>
+    <p>
+        <input type="button" name="senape-form[cancel]" value="{{#i18n.tr}}Cancel{{/i18n.tr}}">
+        <input type="submit" name="senape-form[add-comment]" value="{{#i18n.tr}}Post comment{{/i18n.tr}}">
+    </p>
+    <input type="hidden" name="senape-page-current" value="{{page-current}}">
+    <input type="hidden" name="senape-controller" value="site">
+    <input type="hidden" name="senape-action" value="add">
+</form>
