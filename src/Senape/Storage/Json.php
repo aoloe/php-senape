@@ -150,6 +150,10 @@ class Json extends Storage {
         return $comment;
     }
 
+    /**
+     * Recursively look for the comment that has the id matching reply-to-id and attach
+     *  the comment to its 'reply' list
+     */
     private function addToParentComment(&$list, $comment) {
         foreach ($list as $key => $value) {
             if ($value['id'] == $comment['reply-to-id']) {
@@ -163,5 +167,26 @@ class Json extends Storage {
             }
         }
         return false;
+    }
+
+    public function getSiteList() {
+        $list = null;
+        $path = $this->settings['senape-basepath-data'].$this->settings['storage-json-data-path'].'site.json';
+        if (!file_exists($path)) {
+            if (is_writable(dirname($path))) {
+                $list = array();
+                file_put_contents($path, json_encode($list));
+            } else {
+                throw new \Aoloe\Senape\Exception\FileNotWritable($path);
+            }
+        } else {
+            $list = file_get_contents($path);
+            $list = json_decode($list, true);
+            \Aoloe\debug('list', $list);
+            if ($list === false) {
+                throw new \Aoloe\Senape\Exception\FileInvalid($path);
+            }
+        }
+        return $list;
     }
 }

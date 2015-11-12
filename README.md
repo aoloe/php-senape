@@ -186,5 +186,5 @@ Short term tasks:
 - likes & co. as plugins that can attach themselves to events?
   - it should also be possible to use plugins for the storage?
 - administrate the comments from the page itself
-- create a converter enabling to export the comments or switch storage engine (by site(s))
+- create a converter enabling to export/backup the comments or switch storage engine (by site(s))
 - implement the storage as a plugin reacting to events (and let people add their own storage engines)

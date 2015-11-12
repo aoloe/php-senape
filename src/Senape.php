@@ -136,12 +136,12 @@ class Senape
         return $result;
     }
 
-    /**
-     * @param string $page An identifier unique for the site (mostly and URI or a page title)
-     * @param string $site The site accepting the comments. If null, the domain running the engine will be used.
-     */
     public function getComments() {
         return new Senape\Comment($this->settings);
+    }
+
+    public function getSites() {
+        return new Senape\Site($this->settings);
     }
 
     public function getViewHtml() {
