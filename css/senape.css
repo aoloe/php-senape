@@ -7,3 +7,13 @@
     display:""; /* might be a workardound for ie */
     display:initial; /* not supported by ie */
 }
+
+.senape-add-comment textarea[name="senape-form[comment]"] {
+    width:400px;
+    height:150px;
+}
+
+.senape-add-reply textarea[name="senape-form[comment]"] {
+    width:400px;
+    height:100px;
+}

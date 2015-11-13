@@ -162,6 +162,11 @@ Short term tasks:
   - [ ] setting for the filesystem access rights to the generated files
   - [x] store the comments as json
   - [ ] store the comments as mysql
+  - [ ] create permalinks for the comments
+  - [ ] allow comments editing
+    - in place through javascript (in the same ways as for the replies)
+    - only if a specific cookie is set on the visitor computer
+    - eventually through an email they get
 - [ ] filter the comments for invalid content
   - simply use DOMDocument and the XML parser to simply discard all HTML tags?
 - [x] add the avatars
@@ -180,6 +185,8 @@ Short term tasks:
 - [x] render the widgets from php
 - [ ] enable the likes
   - [ ] show the likes when enabled
+  - [ ] show the count of likes
+  - [ ] eventually list who liked
 - [ ] translation
   - [x] create a translation class
   - [ ] create and load the translation files
@@ -213,6 +220,7 @@ Short term tasks:
   - [ ] allow moderation of comments by site and page
   - [ ] add an allowed site (with aliases) / an allowed base path
   - [ ] moderation through email
+    - needs the message hash and an hash specific to the moderator (or we create two hashes, one for edit and one for moderation)
 - [ ] add an installer
   - [ ] make sure that `data/` exists and is writable (if there is content it should also be writable)
   - [ ] create the mysql structure
@@ -229,6 +237,7 @@ Short term tasks:
   - [ ] comments file
   - [ ] settings file
 - [ ] in the "add comments" form, add a way to set hidden fields to be filled with the state of the hosting framework (`page_id`, ...)
+- [ ] add a backlink to Senape (site? +) github
 
 ## Possible features
 
