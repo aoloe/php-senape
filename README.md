@@ -16,21 +16,54 @@ Verwsion 2.0 will be released as soon as all the features marked in the todo lis
 
 ## Tutorial
 
-### Rendering the comments from PHP
+### Add Senape to your PHP application
 
-### Centralizing the PHP rendering
+#### Getting Senape
 
-### Rendering through client side javascript
+- Adding it to your application trough composer
+- Downloading a `.zip`
+
+#### Ading Senape to a single page
+
+This is the most simple case, but probably also the least useful one.
+
+~~~php
+// some php code
+~~~
+
+#### Using a commong Senape setup for multiple pages
+
+In most cases, you want to share the same setup among multiple pages and only duplicate the few lines of code that instantiating Senape and defining the current page.
+
+~~~php
+// some php code
+~~~
+
+Of course you can also get your own Senape class to guess the current page from the url and get to the very simple call:
+
+~~~php
+// some php code
+~~~
+
+
+### Create your own Senape server and use it through Javascript
+
 
 ### Peculiarities
 
-- Senape should be put in its own DOM element with an id that you pass to the javascript classes.
+- Senape should be rendered in its own DOM element with an id that you pass to the javascript classes.
 
 ## Contributing
 
 For now, the best you can do is to have a look at the `TODO:` in the code.
 
 Second best is choosing one of the _unchecked_ items in the todo list below.
+
+On top of it we could need:
+
+- fancy themes,
+- some documentation and tutorials,
+- unit testing.
 
 Before working on a feature, please add a matching ticket in the issue tracker and announce that you will be working on it. Then fork the repository, create a new branch and make a pull request when you're done.
 
@@ -65,11 +98,11 @@ Further ideas:
 
 ## Why not Hashover
 
-For a long time, I've been looking for a commenting system that is not bound to any proprietary serrvice and can be installed on (pretty) any cheap shared hosting.
+For a long time, I've been looking for a commenting system that is not bound to any proprietary service and can be installed on (pretty) any cheap shared hosting.
 
-The day I discovered Hashover was a really happy day. Well a first look into the sources was not such a happy experience, but after a few clicks, I also discovered that Hashover-Next was in the workings and it looked much better.
+The day I discovered Hashover was a really happy day. A first look into its sources was not such a happy experience but, after a few clicks, I also discovered that Hashover-Next was in the workings and it looked much better.
 
-I did setup a local demo site and it was pleasant to use. I've started configuring it to work with my sites and submitted a few patches. But I kept stepping into what are for me unusual choices that the author of Hashover has made. I even start programming a simpler Json storage engine but, after having spent some time on a workaround to the unusual comment-id sequence used in Hashover, I said to myself: wouldn't it be easier to start from scratch?
+I did setup a local demo site and it was pleasant to use. I've started configuring it to work with my sites and submitted a few patches. But I kept stepping into what are for me unusual choices made by the author of Hashover. While working on a simpler Json storage engine, I started looking for a workaround to the unusual comment-id sequence used in Hashover, and I said to myself: wouldn't it be easier to start from scratch?
 
 Senape is my try at providing a commenting service. Deeply inspired by Hashover, but with no code borrowed from it (both because of the very different coding style and the incompatible license).
 
@@ -93,9 +126,8 @@ Short term tasks:
 
 - in js add the form and the comments through template
   - the api should only return in the list the fields that are meant to be shown (no hash, email, ...)
-- add the replies
-  - show the nesting in the replies
-- by default disable the likes
+- by default disable the likes and replies
+  - add the settings for it
 - make sure that the comments do not contain invalid markup
 - add the comments to a list of n latest comments (to be shown to the moderator)
 - document the fields for the .json comments file
@@ -119,7 +151,7 @@ Short term tasks:
    - [ ] display the form before or after the list (settings)
    - [x] create a template for the comments list
    - [x] create a template for the comment
-   - [ ] render the indented replies in mustache
+   - [x] render the indented replies in mustache
      - http://stackoverflow.com/questions/31885263/mustache-js-how-to-create-a-recursive-list-with-an-unknown-number-of-sub-lists
    - [ ] dynamically add the result to the html
    - [x] if the settings say so, add labels to the input boxes
@@ -182,6 +214,7 @@ Short term tasks:
   - [ ] show the latest comments
   - [ ] allow moderation of comments by site and page
   - [ ] add an allowed site (with aliases) / an allowed base path
+  - [ ] moderation through email
 - [ ] add an installer
   - [ ] make sure that `data/` exists and is writable (if there is content it should also be writable)
   - [ ] create the mysql structure
@@ -201,7 +234,6 @@ Short term tasks:
 
 ## Possible features
 
-- the administrator gets an email for each comment
 - the administrator can moderate the comments from the email
   - through a link with a hash (action without authentication)
   - by ansering to an email conto that is read by the script

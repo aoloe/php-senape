@@ -11,16 +11,12 @@ class Html extends \Aoloe\Senape\View
         $this->path_template = $this->settings['senape-basepath-themes'].$this->settings['ui-theme'].'/template/';
         // \Aoloe\debug('path', $this->path_template);
     }
-    public function getList($list) {
-        // \Aoloe\debug('settings', $this->settings);
-        // \Aoloe\debug('list', $list);
-        $mustache = new \Mustache_Engine(array(
-            'loader' => new \Mustache_Loader_FilesystemLoader($this->path_template),
-            'helpers' => array(
-                'i18n' => \Aoloe\Senape\I18n::getInstance($this->settings),
-            ),
-        ));
-        foreach ($list['comment'] as &$item) {
+
+    /**
+     * Add the avatar based on the email address and make the date nicer to read.
+     */
+    private function getNicerComments($list) {
+        foreach ($list as &$item) {
             // TODO: this hould not be here: use a static/namespaced function in Comment?
             if ($this->settings['ui-avatar-theme'] != 'none') {
                 if ($item['email'] == '') {
@@ -50,15 +46,49 @@ class Html extends \Aoloe\Senape\View
             } else {
                 $item['date'] = date($this->settings['ui-date-format'], $date);
             }
+            if (!empty($item['reply'])) {
+                $item['reply'] = $this->getNicerComments($item['reply']);
+            }
         }
         unset($item);
+        return $list;
+    }
 
-        // TODO: check if it's not better to put a fixed translatable string in the template and only pass the string in the settings if it is not null... wondering how to allow translations, then: with a custom translations file?
+    /**
+     * Convert the associative arrays into ArrayIterators.
+     */
+    private function getListWithArrayIterator($list) {
+        $result = [];
+        foreach ($list as $item) {
+            if (!empty($item['reply'])) {
+                $item['reply'] = $this->getListWithArrayIterator($item['reply']);
+            }
+            $result[] = $item;
+        }
+        return new \ArrayIterator($result);
+    }
+
+    public function getList($list) {
+        // \Aoloe\debug('settings', $this->settings);
         // \Aoloe\debug('list', $list);
+        $mustache = new \Mustache_Engine(array(
+            'loader' => new \Mustache_Loader_FilesystemLoader($this->path_template),
+            'helpers' => array(
+                'i18n' => \Aoloe\Senape\I18n::getInstance($this->settings),
+            ),
+        ));
+
+        $list['comment'] = $this->getNicerComments($list['comment']);
+
+        // for mustache, each associative array must be converted into ArrayIterator
+        $list['comment'] = $this->getListWithArrayIterator($list['comment']);
+
         $template = $mustache->loadTemplate('comment-list');
         return $template->render(array(
-            'list' => new \ArrayIterator($list['comment']),
+            'list' => $list['comment'],
+            // TODO: check if it's not better to put a fixed translatable string in the template and only pass the string in the settings if it is not null... wondering how to allow translations, then: with a custom translations file?
             'no-comment' => \Aoloe\Senape\I18n::getInstance($this->settings)->tr($this->settings['comment-message-no-comment']),
+            'has-likes' => true, // TODO: read it from the settings
             'has-replies' => $this->settings['comment-reply'],
         ));
     }

@@ -1,0 +1,9 @@
+<li class="senape-comment"><div><img src="{{avatar}}"> {{name}}, {{date}}</div>
+    <div>{{comment}}</div>
+    <div>{{#has-likes}}♡{{/has-likes}} {{#has-replies}} <a class="senape-reply-action" data-senape-comment-id="{{id}}">{{#i18n.tr}}Reply{{/i18n.tr}}</a>{{/has-replies}}</div>
+    {{#reply}}
+    <ul>
+    {{>comment-list-li}}
+    </ul>
+    {{/reply}}
+</li>
