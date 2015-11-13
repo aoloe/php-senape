@@ -13,6 +13,7 @@ class Html extends \Aoloe\Senape\View
     }
     public function getList($list) {
         // \Aoloe\debug('settings', $this->settings);
+        // \Aoloe\debug('list', $list);
         $mustache = new \Mustache_Engine(array(
             'loader' => new \Mustache_Loader_FilesystemLoader($this->path_template),
             'helpers' => array(
@@ -20,6 +21,7 @@ class Html extends \Aoloe\Senape\View
             ),
         ));
         foreach ($list['comment'] as &$item) {
+            // TODO: this hould not be here: use a static/namespaced function in Comment?
             if ($this->settings['ui-avatar-theme'] != 'none') {
                 if ($item['email'] == '') {
                     $item['avatar'] = $this->settings['senape-http-theme-current'].'images/avatar.png';
@@ -32,7 +34,7 @@ class Html extends \Aoloe\Senape\View
                     //&d='.($gravatar_theme == 'custom' ? urlencode($item['avatar']) : $gravatar_default).
                 }
             }
-            // TODO: use a static/namespaced function in Comment?
+            // TODO: this hould not be here: use a static/namespaced function in Comment?
             $now = time();
             $date = $item['date'];
             if ($now - $date <= 45 * 60) {

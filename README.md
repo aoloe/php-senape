@@ -94,7 +94,9 @@ Short term tasks:
 - in js add the form and the comments through template
   - the api should only return in the list the fields that are meant to be shown (no hash, email, ...)
 - add the replies
-  - storing the replies from the form
+  - show the nesting in the replies
+- by default disable the likes
+- make sure that the comments do not contain invalid markup
 - add the comments to a list of n latest comments (to be shown to the moderator)
 - document the fields for the .json comments file
 - when in js mode, do not submit the form but simply send the data through ajax.
@@ -130,6 +132,8 @@ Short term tasks:
   - [ ] setting for the filesystem access rights to the generated files
   - [x] store the comments as json
   - [ ] store the comments as mysql
+- [ ] filter the comments for invalid content
+  - simply use DOMDocument and the XML parser to simply discard all HTML tags?
 - [x] add the avatars
   - [x] show the own avatar or the gravatar by email
   - [x] use the settings for the avatars
@@ -144,6 +148,8 @@ Short term tasks:
    - [x] add a "reply to" hidden field in the form
    - [ ] store the reply coming from the form
 - [x] render the widgets from php
+- [ ] enable the likes
+  - [ ] show the likes when enabled
 - [ ] translation
   - [x] create a translation class
   - [ ] create and load the translation files

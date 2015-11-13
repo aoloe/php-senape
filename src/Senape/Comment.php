@@ -32,6 +32,7 @@ class Comment {
             'comment',
             'status', // pending / approved / hidden
             'reply',
+            'reply-to-id',
             'id',
             'hash',
             'likes',
