@@ -22,6 +22,10 @@ Verwsion 2.0 will be released as soon as all the features marked in the todo lis
 
 ### Rendering through client side javascript
 
+### Peculiarities
+
+- Senape should be put in its own DOM element with an id that you pass to the javascript classes.
+
 ## Contributing
 
 For now, the best you can do is to have a look at the `TODO:` in the code.
@@ -31,6 +35,19 @@ Second best is choosing one of the _unchecked_ items in the todo list below.
 Before working on a feature, please add a matching ticket in the issue tracker and announce that you will be working on it. Then fork the repository, create a new branch and make a pull request when you're done.
 
 ## Implementation details
+
+### Javascript support
+
+On the Javascript side, Senape does not depend (for now) on any Framework.
+
+It should be possible to get Senape to work with any browser. This means that you can install and configure Senape in a way that all visitor will be able to submit comments.
+
+But many non basic features that rely on Javascript will need a modern browser:
+
+- Microsoft Interent Explorer 9
+- A not yet specified modern vesion of Chrome, Firefox, Opera, or Safari.
+
+Supporting older browsers -- eventually by using a framework like JQuery -- is possible but is not planned for now.
 
 ### Submitting a comment
 
@@ -77,14 +94,13 @@ Short term tasks:
 - in js add the form and the comments through template
   - the api should only return in the list the fields that are meant to be shown (no hash, email, ...)
 - add the replies
-  - add the reply to the json file
-  - create a trigger that moves the submit form below the comment that needs a reply
-  - hide the cancel button when not in reply mode
+  - storing the replies from the form
 - add the comments to a list of n latest comments (to be shown to the moderator)
 - document the fields for the .json comments file
 - when in js mode, do not submit the form but simply send the data through ajax.
   - optionally, allow the ajax submit also when in php mode (does it make sense?)
 - add `sample.php` and `senape.php` as samples to the repository
+- add a `render()` method that shows the list and the form and respects the order from the settings
 
 - [x] create a main class
 - [x] define the settings
@@ -99,13 +115,21 @@ Short term tasks:
    - [x] test mustache for the js side
    - [x] create a template for the comment submission area
    - [ ] display the form before or after the list (settings)
-   - [ ] dynamically add a form / move the form below the comment when in reply mode (js mandatory)
-     - [ ] create the javascript to move / add the form
-     - [ ] add a "reply to" hidden field in the form
    - [x] create a template for the comments list
    - [x] create a template for the comment
+   - [ ] render the indented replies in mustache
+     - http://stackoverflow.com/questions/31885263/mustache-js-how-to-create-a-recursive-list-with-an-unknown-number-of-sub-lists
    - [ ] dynamically add the result to the html
    - [x] if the settings say so, add labels to the input boxes
+- [ ] add comments
+  - [x] add the first comment
+  - [ ] for each first comment on the page, add the page information in the json file (the request should state the last seen comment)
+  - [x] make sure that json the file is locked (for read/write) between read and write
+    - only block user that want to read for writing
+    - http://stackoverflow.com/questions/2450850/read-and-write-to-a-file-while-keeping-lock
+  - [ ] setting for the filesystem access rights to the generated files
+  - [x] store the comments as json
+  - [ ] store the comments as mysql
 - [x] add the avatars
   - [x] show the own avatar or the gravatar by email
   - [x] use the settings for the avatars
@@ -114,6 +138,11 @@ Short term tasks:
     - https://dev.twitter.com/rest/reference/get/users/show
     - needs the comments service to be registered with Twitter
   - [ ] find a way to display the rules for the avatars
+- [ ] allow replies
+  - [x] store the replies
+   - [x] create the javascript for moving around the form
+   - [x] add a "reply to" hidden field in the form
+   - [ ] store the reply coming from the form
 - [x] render the widgets from php
 - [ ] translation
   - [x] create a translation class
@@ -137,19 +166,6 @@ Short term tasks:
   - [x] read the comments as json
   - [ ] read the comments as mysql
   - [x] return real comments
-- [ ] add comments
-  - [x] add the first comment
-  - [ ] allow replies
-    - [ ] store the replies
-    - [ ] render the replies in mustache
-      - http://stackoverflow.com/questions/31885263/mustache-js-how-to-create-a-recursive-list-with-an-unknown-number-of-sub-lists
-  - [ ] for each first comment on the page, add the page information in the json file (the request should state the last seen comment)
-  - [x] make sure that json the file is locked (for read/write) between read and write
-    - only block user that want to read for writing
-    - http://stackoverflow.com/questions/2450850/read-and-write-to-a-file-while-keeping-lock
-  - [ ] setting for the filesystem access rights to the generated files
-  - [x] store the comments as json
-  - [ ] store the comments as mysql
 - [ ] send notifications
   - [ ] only allow to get notifications if the email field is filled (javascript mandatory)
 - [ ] spam protection

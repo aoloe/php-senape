@@ -1,5 +1,5 @@
 <!-- TODO: remove the id as soon as we know how to fetch an item by class -->
-<form method="post" id="form-temporary" action = "{{form-action}}" class="senape-add-comment">
+<form method="post" action = "{{form-action}}" class="senape-add-comment">
     <p>
         {{#has-labels}}<label class="senape-label-for-input">{{#i18n.tr}}Name{{/i18n.tr}}{{/has-labels}}</label>
         <input type="text" name="senape-form[name]" title="{{#i18n.tr}}Name (optional){{/i18n.tr}}"{{#has-name}} value="{{name}}"{{/has-name}} placeholder="{{#i18n.tr}}Name{{/i18n.tr}}">

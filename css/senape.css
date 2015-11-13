@@ -1,1 +1,9 @@
 /* TODO: hide the cancel button in the comment submission form */
+.senape-add-comment input[name="senape-form[cancel]"] {
+    display:none;
+}
+
+.senape-add-reply input[name="senape-form[cancel]"] {
+    display:""; /* might be a workardound for ie */
+    display:initial; /* not supported by ie */
+}

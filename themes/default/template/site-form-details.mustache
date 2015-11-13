@@ -1,12 +1,3 @@
-<ul>
-{{#list}}
-<li>< href="?senape-form-site={{#url.enc}}{{item}}{{/url.enc}}">{{item}}</a></li>
-{{/list}}
-{{^list}}
-<li>{{no-site}}</li>
-{{/list}}
-</ul>
-
 <form method="post" id="form-temporary" action = "{{form-action}}" class="senape-add-comment">
     <p>
         {{#has-labels}}<label class="senape-label-for-input">{{#i18n.tr}}Name{{/i18n.tr}}{{/has-labels}}</label>
@@ -18,3 +9,12 @@
     <input type="hidden" name="senape-controller" value="site">
     <input type="hidden" name="senape-action" value="add">
 </form>
+
+<ul>
+{{#list}}
+<li>< href="?senape-form-comment={{id}}">{{date}}</a> {{comment}}</li>
+{{/list}}
+{{^list}}
+<li>{{#i18n.tr}}No comments yet{{/i18n.tr}}</li>
+{{/list}}
+</ul>
