@@ -88,7 +88,7 @@ class Html extends \Aoloe\Senape\View
             'list' => $list['comment'],
             // TODO: check if it's not better to put a fixed translatable string in the template and only pass the string in the settings if it is not null... wondering how to allow translations, then: with a custom translations file?
             'no-comment' => \Aoloe\Senape\I18n::getInstance($this->settings)->tr($this->settings['comment-message-no-comment']),
-            'has-likes' => true, // TODO: read it from the settings
+            'has-likes' => $this->settings['comment-like'],
             'has-replies' => $this->settings['comment-reply'],
         ));
     }

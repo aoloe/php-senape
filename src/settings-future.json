@@ -59,10 +59,6 @@
         "description": "By default, collapse the replies",
         "value": false
     },
-    "comment-like": {
-        "description": "Allow likes to comments",
-        "value": true
-    },
     "comment-dislike": {
         "description": "Allow dislikes to comments",
         "value": false

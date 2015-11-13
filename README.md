@@ -126,8 +126,6 @@ Short term tasks:
 
 - in js add the form and the comments through template
   - the api should only return in the list the fields that are meant to be shown (no hash, email, ...)
-- by default disable the likes and replies
-  - add the settings for it
 - make sure that the comments do not contain invalid markup
 - add the comments to a list of n latest comments (to be shown to the moderator)
 - document the fields for the .json comments file

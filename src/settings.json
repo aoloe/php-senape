@@ -41,7 +41,11 @@
     },
     "comment-reply": {
         "description": "Allow replies to comments",
-        "value": true
+        "value": false
+    },
+    "comment-like": {
+        "description": "Allow likes to comments",
+        "value": false
     },
     "ui-theme": {
         "description": "HTML and CSS theme the interface",
