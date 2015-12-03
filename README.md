@@ -124,6 +124,7 @@ Anyway, I've learned much from Hashover and I'm grateful for all the work Jacob 
 
 Short term tasks:
 
+- why  it is impossible to submit the reply form? (on submit i get a "received no data" error from the server)
 - in js add the form and the comments through template
   - the api should only return in the list the fields that are meant to be shown (no hash, email, ...)
 - make sure that the comments do not contain invalid markup
@@ -163,6 +164,8 @@ Short term tasks:
   - [x] store the comments as json
   - [ ] store the comments as mysql
   - [ ] create permalinks for the comments
+    - [x] create the placeholder in the template
+    - [ ] create a permalink
   - [ ] allow comments editing
     - in place through javascript (in the same ways as for the replies)
     - only if a specific cookie is set on the visitor computer

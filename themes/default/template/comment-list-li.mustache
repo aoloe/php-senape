@@ -1,6 +1,6 @@
 <li class="senape-comment"><div><img src="{{avatar}}"> {{name}}, {{date}}</div>
     <div>{{comment}}</div>
-    <div>{{#has-likes}}♡{{/has-likes}} {{#has-replies}} <a class="senape-reply-action" data-senape-comment-id="{{id}}">{{#i18n.tr}}Reply{{/i18n.tr}}</a>{{/has-replies}}</div>
+    <div>{{#has-likes}}♡{{/has-likes}} {{#has-replies}} <a class="senape-reply-action" data-senape-comment-id="{{id}}">{{#i18n.tr}}Reply{{/i18n.tr}}</a>{{/has-replies}} <a class="senape-comment-permalink" href="" title="{{#i18n.tr}}Permalink{{/i18n.tr}}">∞</a></div>
     {{#reply}}
     <ul>
     {{>comment-list-li}}
