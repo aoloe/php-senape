@@ -118,19 +118,19 @@ class Senape
             // TODO: try to avoid the regexp
             $controller = preg_replace("/[^[:alnum:][:space:]]/u", '', $this->request['senape-controller']);
             $action = preg_replace("/[^[:alnum:][:space:]]/u", '', $this->request['senape-action']);
-            debug('controller', $controller);
-            debug('action', $action);
+            // debug('controller', $controller);
+            // debug('action', $action);
             if (!empty($controller) && !empty($action)) {
                 $controllerClass = 'Senape\\Controller\\Action'.ucfirst($controller);
-                debug('controllerClass', $controllerClass);
+                // debug('controllerClass', $controllerClass);
                 $path = $this->settings['senape-basepath-src'].strtr($controllerClass, '\\', '/').'.php';
-                debug('path', $path);
+                // debug('path', $path);
                 if (is_readable($path)) {
 
                     $controllerClass = '\\Aoloe\\'.$controllerClass;
                     $result = new $controllerClass($this->settings, $this->request);
                 }
-                debug('result', $result);
+                // debug('result', $result);
             }
         }
         return $result;

@@ -184,7 +184,7 @@ Short term tasks:
   - [x] store the replies
    - [x] create the javascript for moving around the form
    - [x] add a "reply to" hidden field in the form
-   - [ ] store the reply coming from the form
+   - [x] store the reply coming from the form
 - [x] render the widgets from php
 - [ ] enable the likes
   - [ ] show the likes when enabled
