@@ -161,7 +161,7 @@ class Json extends Storage {
                 $list[$key]['reply'][$comment['id']] = $comment;
                 return true;
             } elseif (!empty($value['reply'])) {
-                if ($this->addToParentComment($list, $comment)) {
+                if ($this->addToParentComment($list[$key]['reply'], $comment)) {
                     return true;
                 }
             }
