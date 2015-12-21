@@ -31,9 +31,9 @@ This is the most simple case, but probably also the least useful one.
 // some php code
 ~~~
 
-#### Using a commong Senape setup for multiple pages
+#### Using a common Senape setup for multiple pages
 
-In most cases, you want to share the same setup among multiple pages and only duplicate the few lines of code that instantiating Senape and defining the current page.
+In most cases, you want to share the same setup among multiple pages and only duplicate the few lines of code instantiating Senape and defining the current page.
 
 ~~~php
 // some php code
@@ -124,13 +124,12 @@ Anyway, I've learned much from Hashover and I'm grateful for all the work Jacob 
 
 Short term tasks:
 
-- why  it is impossible to submit the reply form? (on submit i get a "received no data" error from the server)
-- in js add the form and the comments through template
+- in javascript add the form and the comments through template
   - the api should only return in the list the fields that are meant to be shown (no hash, email, ...)
 - make sure that the comments do not contain invalid markup
 - add the comments to a list of n latest comments (to be shown to the moderator)
 - document the fields for the .json comments file
-- when in js mode, do not submit the form but simply send the data through ajax.
+- when in javascript mode, do not submit the form but simply send the data through ajax.
   - optionally, allow the ajax submit also when in php mode (does it make sense?)
 - add `sample.php` and `senape.php` as samples to the repository
 - add a `render()` method that shows the list and the form and respects the order from the settings
@@ -140,9 +139,10 @@ Short term tasks:
   - [x] define default settings
   - [x] load the local settings
 - [ ] create a `senape.js` file that can be load by the client
-  - [x] create a js file that is able to manipulate the dom and to get json through ajax
+  - [x] create a javascript file that is able to manipulate the dom and to get json through ajax
   - [x] return json from php
   - [ ] use a js template engine
+- [ ] implement cross site requests from `senape.js` to get the `mustache` files from a different server as where the static html is.
 - [ ] create the main widgets
    - [x] test mustache for the php side
    - [x] test mustache for the js side
@@ -165,13 +165,14 @@ Short term tasks:
   - [ ] store the comments as mysql
   - [ ] create permalinks for the comments
     - [x] create the placeholder in the template
+    - [ ] add an anchor for each comment
     - [ ] create a permalink
   - [ ] allow comments editing
     - in place through javascript (in the same ways as for the replies)
     - only if a specific cookie is set on the visitor computer
     - eventually through an email they get
 - [ ] filter the comments for invalid content
-  - simply use DOMDocument and the XML parser to simply discard all HTML tags?
+  - simply use DOMDocument and the XML parser to discard all HTML tags?
 - [x] add the avatars
   - [x] show the own avatar or the gravatar by email
   - [x] use the settings for the avatars
@@ -252,3 +253,4 @@ Short term tasks:
 - administrate the comments from the page itself
 - create a converter enabling to export/backup the comments or switch storage engine (by site(s))
 - implement the storage as a plugin reacting to events (and let people add their own storage engines)
+- only allow linking to images and downloadable files. but the administrator could pull them in a local storage for long term archiving.

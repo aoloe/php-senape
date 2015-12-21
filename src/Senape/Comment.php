@@ -57,6 +57,27 @@ class Comment {
     }
 
     /**
+     * get the list of comments to be consumed from javascript.
+     * since the list of replies should be an array, it should not use the id as its index.
+     */
+    public function getListForJs() {
+        $result = $this->getList();
+        $result['comment'] = $this->getReplyAssociativeToArray($result['comment']);
+        return $result;
+    }
+
+    private function getReplyAssociativeToArray($list) {
+        $result = array();
+        foreach ($list as $item) {
+            if (!empty($item['reply'])) {
+                $item['reply'] = $this->getReplyAssociativeToArray($item['reply']);
+            }
+            $result[] = $item;
+        }
+        return $result;
+    }
+
+    /**
      * @param array $comment
      */
     public function add($comment) {
