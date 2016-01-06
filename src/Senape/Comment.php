@@ -63,14 +63,27 @@ class Comment {
     public function getListForJs() {
         $result = $this->getList();
         $result['comment'] = $this->getReplyAssociativeToArray($result['comment']);
+        $result['comment'] = $this->getWithoutPrivateFields($result['comment']);
         return $result;
     }
 
     private function getReplyAssociativeToArray($list) {
-        $result = array();
-        foreach ($list as $item) {
+        $result = array_values($list); // remove keyes and index=0..n
+        foreach ($result as $item) {
             if (!empty($item['reply'])) {
                 $item['reply'] = $this->getReplyAssociativeToArray($item['reply']);
+            }
+        }
+        return $result;
+    }
+
+    private function getWithoutPrivateFields($list) {
+        $result = array();
+        foreach ($list as $item) {
+            $item['email'] = '';
+            $item['hash'] = '';
+            if (!empty($item['reply'])) {
+                $item['reply'] = $this->getWithoutPrivateFields($item['reply']);
             }
             $result[] = $item;
         }

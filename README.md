@@ -2,11 +2,12 @@
 
 A lightweight commenting system:
 
-- you can install on your own server (with a modern version of php).
-- you can include through javascript or php.
-- looks more like a serious commenting system than a fancy forum.
+- You can install it on your own server (with a modern version of php).
+- You can include through javascript or php.
+- Looks more like a serious commenting system than a fancy forum.
 
-It's optimized for simple sites with a few pages and few comments per pages and self hosting.
+Senape is optimized for simple sites with a few pages and few comments per pages.  
+It is not meant to be used to provide a public commenting system.
 
 Currently you can add comments and retrieve them in a simple list from a PHP script.
 
@@ -125,7 +126,8 @@ Anyway, I've learned much from Hashover and I'm grateful for all the work Jacob 
 Short term tasks:
 
 - in javascript add the form and the comments through template
-  - the api should only return in the list the fields that are meant to be shown (no hash, email, ...)
+  - correctly show all the fields in the comments list
+  - add the reply form to the comments list
 - make sure that the comments do not contain invalid markup
 - add the comments to a list of n latest comments (to be shown to the moderator)
 - document the fields for the .json comments file
@@ -141,7 +143,7 @@ Short term tasks:
 - [ ] create a `senape.js` file that can be load by the client
   - [x] create a javascript file that is able to manipulate the dom and to get json through ajax
   - [x] return json from php
-  - [ ] use a js template engine
+  - [x] use a js template engine
 - [ ] implement cross site requests from `senape.js` to get the `mustache` files from a different server as where the static html is.
 - [ ] create the main widgets
    - [x] test mustache for the php side
@@ -160,7 +162,7 @@ Short term tasks:
   - [x] make sure that json the file is locked (for read/write) between read and write
     - only block user that want to read for writing
     - http://stackoverflow.com/questions/2450850/read-and-write-to-a-file-while-keeping-lock
-  - [ ] setting for the filesystem access rights to the generated files
+  - [ ] configuration for the filesystem access rights to the generated files
   - [x] store the comments as json
   - [ ] store the comments as mysql
   - [ ] create permalinks for the comments
@@ -200,6 +202,7 @@ Short term tasks:
   - [ ] import all translation files from hashover (public domain)
   - [ ] replace the keys in the translation files with the string in the code
   - [ ] add a `tr_count()` function that respect the numerals
+- [ ] translation in javascript
 - [ ] handle errors
   - [ ] show the errors from php.
   - [ ] return the errors as json and display them.
@@ -217,6 +220,7 @@ Short term tasks:
   - [ ] only allow to get notifications if the email field is filled (javascript mandatory)
 - [ ] spam protection
   - [ ] use fake hidden fields that only get filled by bots?
+  - [ ] use an external service
 - [ ] add an http router/controller for processing the requests
 - [ ] add a simple administration interface
   - [ ] show the url to be inserted in the javascript call
