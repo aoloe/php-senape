@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   id="svg2160"
+   sodipodi:docname="avatar.svg"
+   inkscape:export-filename="/run/user/1000/gvfs/sftp:host=jeroenpraat.nl,port=69,user=jeroen/var/www/redmatrix/images/default_profile_photos/black_avatar_2/48.png"
+   viewBox="0 0 169.59087 169.65898"
+   inkscape:export-xdpi="21.6"
+   version="1.1"
+   inkscape:export-ydpi="21.6"
+   inkscape:version="0.91 r13725"
+   width="169.59087"
+   height="169.65898">
+  <defs
+     id="defs4185" />
+  <sodipodi:namedview
+     id="namedview2995"
+     fit-margin-left="0"
+     inkscape:showpageshadow="true"
+     inkscape:zoom="1.7383042"
+     borderopacity="1"
+     inkscape:current-layer="svg2160"
+     inkscape:cx="102.74277"
+     inkscape:cy="120.9155"
+     borderlayer="false"
+     inkscape:window-maximized="0"
+     showgrid="false"
+     fit-margin-right="0"
+     inkscape:guide-bbox="true"
+     inkscape:snap-global="true"
+     showguides="true"
+     bordercolor="#666666"
+     inkscape:window-x="0"
+     guidetolerance="10"
+     objecttolerance="10"
+     inkscape:window-y="15"
+     fit-margin-bottom="0"
+     inkscape:window-width="1364"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     pagecolor="#ffffff"
+     gridtolerance="10"
+     inkscape:window-height="677"
+     showborder="true"
+     fit-margin-top="0">
+    <sodipodi:guide
+       id="guide2992"
+       position="-14.584061,-20.652048"
+       orientation="0,1" />
+    <sodipodi:guide
+       id="guide2994"
+       position="-14.541288,-20.773266"
+       orientation="1,0" />
+  </sodipodi:namedview>
+  <g
+     id="g4206"
+     transform="translate(1.3056056,-10.054885)">
+    <path
+       id="rect2176"
+       inkscape:connector-curvature="0"
+       d="m 66.978869,96.379879 33.333601,0 c 27.71689,0 50.0004,20.050161 50.0004,47.767051 l 0,35.56695 -133.334401,0 c 0,-20.8335 -0.311669,-18.92932 -0.311669,-35.56695 0,-27.71689 22.595181,-47.767051 50.312902,-47.767051 z" />
+    <path
+       id="path3156"
+       style="fill:#ffffff;fill-rule:evenodd;stroke:#ffffff;stroke-width:12.50010014;stroke-linecap:round;stroke-linejoin:round"
+       inkscape:connector-curvature="0"
+       d="m 58.645469,96.379879 25.0002,33.333601 22.991851,-33.333601 -47.992051,0" />
+    <path
+       id="path3154"
+       inkscape:connector-curvature="0"
+       d="m 128.9127,67.212979 a 45.26703,45.546199 0 1 1 -90.53406,0 45.26703,45.546199 0 1 1 90.53406,0 z" />
+  </g>
+  <metadata
+     id="metadata4183">
+    <rdf:RDF>
+      <cc:Work>
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <cc:license
+           rdf:resource="http://creativecommons.org/publicdomain/zero/1.0/" />
+        <dc:publisher>
+          <cc:Agent
+             rdf:about="http://openclipart.org/">
+            <dc:title>Openclipart</dc:title>
+          </cc:Agent>
+        </dc:publisher>
+        <dc:title></dc:title>
+      </cc:Work>
+      <cc:License
+         rdf:about="http://creativecommons.org/publicdomain/zero/1.0/">
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#Reproduction" />
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#Distribution" />
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#DerivativeWorks" />
+      </cc:License>
+    </rdf:RDF>
+  </metadata>
+  <rect
+     style="opacity:1;fill:none;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.13624538;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+     id="rect4213"
+     width="169.59088"
+     height="169.59088"
+     x="0"
+     y="-7.6293954e-06" />
+</svg>
