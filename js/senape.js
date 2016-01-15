@@ -47,6 +47,21 @@ Senape.prototype.fillTargetWithComments = function() {
     );
 }
 
+Senape_i18n = function (settings) {
+}
+
+Senape_i18n.prototype.tr = function (text) {
+    if (text) {
+        return "«" + text + "»";
+    } else {
+        return function(text, render) {
+            console.log('text', text);
+            console.log('render', render);
+            return "«" + text + "»";
+        }
+    }
+}
+
 /**
  * put the data into the mustache template and attach it to target_id
  */
@@ -54,9 +69,21 @@ Senape.prototype.addComments = function (target_id, data) {
     // console.log('target_id', target_id);
     // console.log('data', data);
     // console.log('template',this.template );
+    // console.log('template[comment-list]',this.template['comment-list'] );
+    console.log('template[comment-list-li]',this.template['comment-list-li'] );
     var rendered = Mustache.render(
         this.template['comment-list'],
-        {'list': data['comment']},
+        {
+            'list': data['comment'],
+            /*
+            'i18n': function() {
+                return function(text, render) {
+                    return render(i18n.tr(text));
+                };
+            }
+            */
+            'i18n': new Senape_i18n
+        },
         {'comment-list-li': this.template['comment-list-li']}
     );
     // console.log('rendered', rendered);
@@ -166,6 +193,37 @@ Senape.prototype.getScriptUrl = function () {
 Senape.prototype.dirname = function (path) {
     return this.rtrim(path, '/').split("/").slice(0, -1).join("/")+"/";
 }
+
+/**
+ * Check if the element is visible on screen
+ * TODO: currently it just uses isElementInViewport to check if the
+ * element is completely on screen. We need a more intelligent behavior:
+ * - check if most of the element is on screen, not the full element
+ * - do not check when the element cannot be fully on screen
+ */
+Senape.prototype.isElementEasilyVisible = function (element) {
+    return this.isElementInViewport(element);
+}
+
+/**
+ * http://stackoverflow.com/a/7557433/5239250
+ */
+Senape.prototype.isElementInViewport = function (element) {
+    var rect = element.getBoundingClientRect();
+    var viewport = {
+        'height' : (window.innerHeight || document.documentElement.clientHeight),
+        'width' : (window.innerWidth || document.documentElement.clientWidth)
+    };
+
+    return (
+        rect.top >= 0 &&
+        rect.left >= 0 &&
+        rect.bottom <= viewport.height &&
+        rect.right <= viewport.width
+    );
+}
+
+
 
 /**
  * http://stackoverflow.com/a/8141809/5239250
